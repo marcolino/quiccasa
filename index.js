@@ -2,46 +2,14 @@
 
 const config = require("./config");
 const { sendEmail } = require("./components/email");
-const { putObjectToS3, getObjectFromS3 } = require("./components/s3");
+const { putObjectToS3, getObjectFromS3, deleteObjectFromS3 } = require("./components/s3");
 const { adsScrape, adsCompare, adsEmailBodyFormat } = require("./services/ads");
 
-module.exports.hello = async (event) => {
-  console.log('Hello CloudWatch world!');
-
-const aws = require("aws-sdk");
-const s3 = new aws.S3({ region: config.region });
-const key = 'ads.json';
-
-var params = { 
-  Bucket: config.bucket,
-  Key: key,
-};
-let obj = null;
-try {
-  const result = await s3.getObject(params).promise();
-  obj = await JSON.parse(result.Body.toString());
-} catch(err) {
-  throw new Error(`error getting object from S3: ${err}`);
-}
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: `Go Serverless v1.0! Hello function executed successfully!`,
-        obj,
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
-};
+const adsFileName = "ads.json";
 
 module.exports.crawl = async (event, context, callback) => {
   console.log('crawl endpoint called');
 
-  const bucketFileName = "ads.json";
   const searchParameters = { // TODO: get from subscription service...
     baseUrl: 'https://www.immobiliare.it/vendita-case',
     city: 'torino',
@@ -72,7 +40,8 @@ module.exports.crawl = async (event, context, callback) => {
     blacklist: {
       agencyes: [
         //{ urlPattern: '\/plan-buy-broker\/$' }, // url not present in main listing
-        { logoPattern: '/670674587.' },
+        //{ logoPattern: '/670674587.|/713419966.' },
+        { logoAltPattern: 'PLAN BUY®' }, 
       ],
     },
   };
@@ -81,8 +50,8 @@ module.exports.crawl = async (event, context, callback) => {
   console.log("searchParameters:", searchParameters);
 
   console.log("loading old ads from s3");
-  const adsOld = await getObjectFromS3(bucketFileName);
-  adsOld[7].url += "-invalidated";
+  const adsOld = await getObjectFromS3(adsFileName);
+  if (adsOld[8]) adsOld[8].url += "-invalidated";
   console.log('# ads old:', adsOld.length);
 
   console.log("scraping new ads");
@@ -102,13 +71,13 @@ module.exports.crawl = async (event, context, callback) => {
     );
     if (result.success) { // email sent successfully
       console.log('crawl sendMail returned success');
-      await putObjectToS3(bucketFileName, adsNew); // save ads new to s3
+      await putObjectToS3(adsFileName, adsNew); // save ads new to s3
       if (callback) callback(null, news); // TODO: used only for non-async calls ?
     } else {
       if (callback) callback(result.error, news); // TODO: used only for non-async calls ?
     }
   } else { // no new ads; save ads new to s3 nonetheless, since some ads possibly have been removed
-    await putObjectToS3(bucketFileName, adsNew); // save ads new to s3
+    await putObjectToS3(adsFileName, adsNew); // save ads new to s3
   }
 
   return {
@@ -125,13 +94,34 @@ module.exports.crawl = async (event, context, callback) => {
   };
 };
 
-module.exports.subscribe = async (event) => {
-  console.log('subscribe event:', event);
+module.exports.reset = async (event) => {
+  console.log('reset event:', event);
+
+  await deleteObjectFromS3(adsFileName);
+
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: `You did successfully subscribe to ${config.serviceName} service, for city ${event.queryStringParameters.city}`,
+        message: `You did successfully reset ${config.serviceName} service`,
+        input: event,
+      },
+      null,
+      10
+    ),
+  };
+};
+
+module.exports.subscribe = async (event) => {
+  console.log('subscribe event:', event);
+
+  // TODO !
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: `You did successfully subscribe to ${config.serviceName} service`,
         input: event,
       },
       null,
@@ -141,6 +131,9 @@ module.exports.subscribe = async (event) => {
 };
 
 module.exports.unsubscribe = async (event) => {
+
+  // TODO !
+
   return {
     statusCode: 200,
     body: JSON.stringify(

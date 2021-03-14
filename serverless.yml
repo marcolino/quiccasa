@@ -55,6 +55,12 @@ functions:
       - http:
           method: get
           path: subscribe
+  reset:
+    handler: index.reset
+    events:
+      - http:
+          method: get
+          path: reset
   unsubscribe:
     handler: index.unsubscribe
     events:
@@ -62,8 +68,8 @@ functions:
           method: get
           path: unsubscribe
 resources:
-  # the S3 bucket that stores the assets
-  assets:
-    type: AWS::S3::Bucket
-    properties:
-    bucketName: quiccasa-bucket-dev
+ Resources:
+   NewResource:
+     Type: AWS::S3::Bucket
+     Properties:
+       BucketName: quiccasa-bucket-dev

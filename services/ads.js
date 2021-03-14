@@ -82,8 +82,11 @@ module.exports.adsScrape = async (searchParameters) => {
       //const elAgencyUrl = $(el).find("div.im-lead__reference > a");
       //ad.agencyUrl = $(elAgencyUrl).attr("href");
 
-      const elAgencyLogo = $(el).find("img.logo-agency");
-      ad.agencyLogo = $(elAgencyLogo).attr("data-src");
+      // const elAgencyLogo = $(el).find("img.logo-agency");
+      // ad.agencyLogo = $(elAgencyLogo).attr("data-src");
+
+      const elAgencyAltLogo = $(el).find("img.logo-agency");
+      ad.agencyAltLogo = $(elAgencyAltLogo).attr("alt");
 
       ++n;
 
@@ -92,9 +95,13 @@ module.exports.adsScrape = async (searchParameters) => {
         //   const re = new RegExp(a.urlPattern);
         //   return ad.url.match(re);
         // }) &&
+        // !searchParameters.blacklist.agencyes.some(a => {
+        //   const re = new RegExp(a.logoPattern);
+        //   return ad.agencyLogo && ad.agencyLogo.match(re);
+        // })
         !searchParameters.blacklist.agencyes.some(a => {
-          const re = new RegExp(a.logoPattern);
-          return ad.agencyLogo && ad.agencyLogo.match(re);
+          const re = new RegExp(a.logoAltPattern);
+          return ad.agencyAltLogo && ad.agencyAltLogo.match(re);
         })
       ;
 
@@ -243,6 +250,7 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                       ${ad.surface} m² |
                       ${ad.rooms} local${ad.rooms <= 1 ? 'e' : 'i'}
                       ${ad.bathrooms ? " | " + ad.bathrooms + " bagn" + (ad.bathrooms <= 1 ? "o" : "i") : ""}
+                      ${ad.floor ? " | " + "piano " + ad.floor}
                     </p>
                     <p style="margin:0;margin-top:12px">
                       <a href="${ad.url}" style="background: #c21f00; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;text-underline-color:#c21f00">

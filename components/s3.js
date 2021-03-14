@@ -20,7 +20,7 @@ module.exports.putObjectToS3 = async (key, data) => {
 }
 
 module.exports.getObjectFromS3 = async (key) => {
-  var params = { 
+  const params = { 
     Bucket: config.bucket,
     Key: key,
   };
@@ -35,5 +35,17 @@ module.exports.getObjectFromS3 = async (key) => {
     } else {
       throw new Error(`error getting object from S3: ${err}`);
     }
+  }
+}
+
+module.exports.deleteObjectFromS3 = async (key) => {
+  const params = {
+    Bucket: config.bucket,
+    Key: key,
+  };
+  try {
+    const result = await s3.deleteObject(params).promise();
+  } catch(err) {
+    throw new Error(`error deleting object from S3: ${err}`);
   }
 }
