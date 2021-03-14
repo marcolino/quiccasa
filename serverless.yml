@@ -1,0 +1,69 @@
+# Welcome to Serverless!
+#
+# This file is the main serverless config file for this service.
+# For full config options, see docs.serverless.com
+
+service: quiccasa
+frameworkVersion: '2'
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: serverless
+  lambdaHashingVersion: 20201221
+  apiGateway:
+    shouldStartNameWithService: true
+  stage: ${opt:stage, "dev"}
+  region: eu-west-1
+  deploymentBucket: quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6
+  environment:
+    variable1: value1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "ses:SendEmail"
+          Resource:
+            - "*"
+          Condition:
+            StringEquals:
+              ses:FromAddress:
+                - "sistemisolari.quiccasa@gmail.com"
+        - Effect: "Allow"
+          Action:
+            - "s3:ListBucket"
+          Resource: { "Fn::Join": [ "", [ "arn:aws:s3:::", "quiccasa-bucket-dev" ] ] }
+        - Effect: "Allow"
+          Action:
+            - "s3:GetObject"
+            - "s3:PutObject"
+            - "s3:DeleteObject"
+          Resource: { "Fn::Join": [ "", [ "arn:aws:s3:::", "quiccasa-bucket-dev", "/*" ] ] }
+functions:
+  crawl:
+    handler: index.crawl
+    events:
+      - http:
+          method: get
+          path: crawl
+#     - schedule: rate(10 minutes)
+      - schedule: cron(0/30 7-22 ? * MON-FRI *)
+      - schedule: cron(0 7-22 ? * SAT-SUN *)
+  subscribe:
+    handler: index.subscribe
+    events:
+      - http:
+          method: get
+          path: subscribe
+  unsubscribe:
+    handler: index.unsubscribe
+    events:
+      - http:
+          method: get
+          path: unsubscribe
+resources:
+  # the S3 bucket that stores the assets
+  assets:
+    type: AWS::S3::Bucket
+    properties:
+    bucketName: quiccasa-bucket-dev
