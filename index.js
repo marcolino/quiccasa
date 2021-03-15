@@ -3,7 +3,7 @@
 const config = require("./config");
 const { sendEmail } = require("./components/email");
 const { putObjectToS3, getObjectFromS3, deleteObjectFromS3 } = require("./components/s3");
-const { adsScrape, adsCompare, adsEmailBodyFormat } = require("./services/ads");
+const { adsScrape, adsCompare, adsEmailBodyFormat } = require("./components/ads");
 //const fs = require("fs");
 //const YAML = require("yaml");
 //const sls = YAML.parse(fs.readFileSync("./serverless.yml", "utf8"));
@@ -28,7 +28,7 @@ module.exports.crawl = async (event, context, callback) => {
       //{ 183: "Pozzo Strada, Parella" },
       { 184: "Aurora, Barriera di Milano, Rebaudengo" },
       //{ 185: "Regio Parco, Vanchiglia, Vanchiglietta" },
-      //{ 187: "Barriera di Lanzo, Falchera, Barca, Bettolla" },
+      //{ 187: "Barriera di Lanzo, Falchera, arca, Bettolla" },
       //{ 189: "Borgo Vittoria, Parco Dora" },
       //{ 191: "Le Vallette, Lucento, Madonna di Campagna" },
       //{ 194: "Santa Rita, Mirafiorni Nord" },
