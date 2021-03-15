@@ -157,7 +157,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1615721318250-2021-03-14T11:28:38.250Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
         },
         "Handler": "index.crawl",
         "Runtime": "nodejs12.x",
@@ -185,7 +185,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1615721318250-2021-03-14T11:28:38.250Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
         },
         "Handler": "index.subscribe",
         "Runtime": "nodejs12.x",
@@ -213,7 +213,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1615721318250-2021-03-14T11:28:38.250Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
         },
         "Handler": "index.reset",
         "Runtime": "nodejs12.x",
@@ -241,7 +241,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1615721318250-2021-03-14T11:28:38.250Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
         },
         "Handler": "index.unsubscribe",
         "Runtime": "nodejs12.x",
@@ -264,44 +264,44 @@
         "UnsubscribeLogGroup"
       ]
     },
-    "CrawlLambdaVersionFqQXyfkqWmFq40BjDft7Hiy5ySI5KMmp24ZABa9fY": {
+    "CrawlLambdaVersionXv3O22iFq4KT2fl7NkbIdm0Tg4Jd3AeyFfvy5WffyMg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CrawlLambdaFunction"
         },
-        "CodeSha256": "LSdQQNNpIX5f9G4Sk1IrASfByN0AWyxDSus2oel/+wY="
+        "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
       }
     },
-    "SubscribeLambdaVersion7lsdoJOOclcmjJhg5uo4z0kUHdPpWmvi2g7DnIhhe9U": {
+    "SubscribeLambdaVersionnV289WcdK9X1W1okM3OCzN27S0D6FW1JHRbh4k6EW4w": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SubscribeLambdaFunction"
         },
-        "CodeSha256": "LSdQQNNpIX5f9G4Sk1IrASfByN0AWyxDSus2oel/+wY="
+        "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
       }
     },
-    "ResetLambdaVersion8adYGyjRMCnwLjcbVOrZ7nrYZDfT6zFTQWrYUwlUu3M": {
+    "ResetLambdaVersionkI2PtLXnbyuBQnuQgCEEqEsBTy9Bd2k8jxB3zU0RII": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ResetLambdaFunction"
         },
-        "CodeSha256": "LSdQQNNpIX5f9G4Sk1IrASfByN0AWyxDSus2oel/+wY="
+        "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
       }
     },
-    "UnsubscribeLambdaVersionRcT4S0J2tgLgnPza1iZJloT20mOYbfm8kv3xwijc": {
+    "UnsubscribeLambdaVersiontRr4xUdmKJGTjUddRxFHY5CyCk05wjhiciSq5lKCE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UnsubscribeLambdaFunction"
         },
-        "CodeSha256": "LSdQQNNpIX5f9G4Sk1IrASfByN0AWyxDSus2oel/+wY="
+        "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
       }
     },
     "CrawlEventsRuleSchedule1": {
@@ -622,7 +622,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1615721310084": {
+    "ApiGatewayDeployment1615803534237": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -799,25 +799,25 @@
     "CrawlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CrawlLambdaVersionFqQXyfkqWmFq40BjDft7Hiy5ySI5KMmp24ZABa9fY"
+        "Ref": "CrawlLambdaVersionXv3O22iFq4KT2fl7NkbIdm0Tg4Jd3AeyFfvy5WffyMg"
       }
     },
     "SubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SubscribeLambdaVersion7lsdoJOOclcmjJhg5uo4z0kUHdPpWmvi2g7DnIhhe9U"
+        "Ref": "SubscribeLambdaVersionnV289WcdK9X1W1okM3OCzN27S0D6FW1JHRbh4k6EW4w"
       }
     },
     "ResetLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ResetLambdaVersion8adYGyjRMCnwLjcbVOrZ7nrYZDfT6zFTQWrYUwlUu3M"
+        "Ref": "ResetLambdaVersionkI2PtLXnbyuBQnuQgCEEqEsBTy9Bd2k8jxB3zU0RII"
       }
     },
     "UnsubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UnsubscribeLambdaVersionRcT4S0J2tgLgnPza1iZJloT20mOYbfm8kv3xwijc"
+        "Ref": "UnsubscribeLambdaVersiontRr4xUdmKJGTjUddRxFHY5CyCk05wjhiciSq5lKCE"
       }
     },
     "ServiceEndpoint": {

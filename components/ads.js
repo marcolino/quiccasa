@@ -250,7 +250,7 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                       ${ad.surface} m² |
                       ${ad.rooms} local${ad.rooms <= 1 ? 'e' : 'i'}
                       ${ad.bathrooms ? " | " + ad.bathrooms + " bagn" + (ad.bathrooms <= 1 ? "o" : "i") : ""}
-                      ${ad.floor ? " | " + "piano " + ad.floor}
+                      ${ad.floor ? " | " + "piano " + ad.floor : ""}
                     </p>
                     <p style="margin:0;margin-top:12px">
                       <a href="${ad.url}" style="background: #c21f00; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;text-underline-color:#c21f00">

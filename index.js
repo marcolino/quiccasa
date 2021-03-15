@@ -4,6 +4,9 @@ const config = require("./config");
 const { sendEmail } = require("./components/email");
 const { putObjectToS3, getObjectFromS3, deleteObjectFromS3 } = require("./components/s3");
 const { adsScrape, adsCompare, adsEmailBodyFormat } = require("./services/ads");
+//const fs = require("fs");
+//const YAML = require("yaml");
+//const sls = YAML.parse(fs.readFileSync("./serverless.yml", "utf8"));
 
 const adsFileName = "ads.json";
 
@@ -51,7 +54,7 @@ module.exports.crawl = async (event, context, callback) => {
 
   console.log("loading old ads from s3");
   const adsOld = await getObjectFromS3(adsFileName);
-  if (adsOld[8]) adsOld[8].url += "-invalidated";
+  //if (adsOld[8]) adsOld[8].url += "-invalidated";
   console.log('# ads old:', adsOld.length);
 
   console.log("scraping new ads");
@@ -103,7 +106,7 @@ module.exports.reset = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: `You did successfully reset ${config.serviceName} service`,
+        message: `You did successfully reset ${config.service} service`,
         input: event,
       },
       null,
@@ -121,7 +124,7 @@ module.exports.subscribe = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: `You did successfully subscribe to ${config.serviceName} service`,
+        message: `You did successfully subscribe to ${config.service} service`,
         input: event,
       },
       null,
@@ -138,7 +141,7 @@ module.exports.unsubscribe = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: `You did successfully unsubscribe from ${config.serviceName} service`,
+        message: `You did successfully unsubscribe from ${config.service} service`,
         input: event,
       },
       null,

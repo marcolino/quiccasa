@@ -1,5 +1,5 @@
 module.exports = {
-  serviceName: "quiccasa", // TODO: read from servless.yml (?)
+  service: "quiccasa",
   companyTitle: "® Sistemi Solari",
   region: "eu-west-1", // TODO: read from servless.yml (?)
   locale: "it-IT",

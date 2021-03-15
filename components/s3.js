@@ -2,7 +2,10 @@
 
 const config = require("../config");
 const aws = require("aws-sdk");
-const s3 = new aws.S3({ region: config.region });
+const fs = require("fs");
+const YAML = require("yaml");
+const sls = YAML.parse(fs.readFileSync("./serverless.yml", "utf8"));
+const s3 = new aws.S3({ region: sls.provider.region });
 
 module.exports.putObjectToS3 = async (key, data) => {
   const params = {
@@ -44,7 +47,7 @@ module.exports.deleteObjectFromS3 = async (key) => {
     Key: key,
   };
   try {
-    const result = await s3.deleteObject(params).promise();
+    await s3.deleteObject(params).promise();
   } catch(err) {
     throw new Error(`error deleting object from S3: ${err}`);
   }
