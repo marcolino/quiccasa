@@ -1,7 +1,7 @@
 module.exports = {
-  service: "quiccasa",
+  service: "quiccasa", // TODO: read from servless.yml (?!)
   companyTitle: "® Sistemi Solari",
-  region: "eu-west-1", // TODO: read from servless.yml (?)
+  region: "eu-west-1", // TODO: read from servless.yml (?!)
   locale: "it-IT",
   currency: "EUR",
   emailSenderAddress: "sistemisolari.quiccasa@gmail.com",

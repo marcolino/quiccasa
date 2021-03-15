@@ -2,10 +2,10 @@
 
 const config = require("../config");
 const aws = require("aws-sdk");
-const fs = require("fs");
-const YAML = require("yaml");
-const sls = YAML.parse(fs.readFileSync("./serverless.yml", "utf8"));
-const s3 = new aws.S3({ region: sls.provider.region });
+// const fs = require("fs");
+// const YAML = require("yaml");
+// const sls = YAML.parse(fs.readFileSync("./serverless.yml", "utf8"));
+const s3 = new aws.S3({ region: config.region });
 
 module.exports.putObjectToS3 = async (key, data) => {
   const params = {

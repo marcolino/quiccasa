@@ -9,7 +9,7 @@ module.exports.adsScrape = async (searchParameters) => {
   const ads = [];
   // TODO: build url from search parameters
   let url = "https://www.immobiliare.it/vendita-case/torino/?criterio=rilevanza&prezzoMinimo=280000&prezzoMassimo=400000&superficieMinima=80&superficieMassima=140&idMZona[]=175&idMZona[]=176&idMZona[]=184&idMZona[]=10407";
-  let n = 0;
+  //let n = 0;
   do {
     let response = null;
     try {
@@ -17,7 +17,7 @@ module.exports.adsScrape = async (searchParameters) => {
       //console.log('response.data:', response.data);
     } catch(err) {
       console.error(`error fetching data from url ${url}:`, err);
-      callback(err);
+      return []; // TODO: review error handling...
     }
 
     const $ = cheerio.load(response.data);
@@ -88,7 +88,7 @@ module.exports.adsScrape = async (searchParameters) => {
       const elAgencyAltLogo = $(el).find("img.logo-agency");
       ad.agencyAltLogo = $(elAgencyAltLogo).attr("alt");
 
-      ++n;
+      //++n;
 
       const accept =
         // !searchParameters.blacklist.agencyes.some(a => {
@@ -138,7 +138,6 @@ module.exports.adsCompare = (o, n) => {
 };
 
 module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
-  let i = 0;
   const one = adsList.length <= 1;
   // TODO: report search criteria name and contents too
 

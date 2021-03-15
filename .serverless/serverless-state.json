@@ -194,13 +194,13 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-                "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
+                "S3Key": "serverless/quiccasa/dev/1615804297769-2021-03-15T10:31:37.769Z/quiccasa.zip"
               },
               "Handler": "index.crawl",
               "Runtime": "nodejs12.x",
               "FunctionName": "quiccasa-dev-crawl",
               "MemorySize": 1024,
-              "Timeout": 6,
+              "Timeout": 30,
               "Environment": {
                 "Variables": {
                   "variable1": "value1"
@@ -222,7 +222,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-                "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
+                "S3Key": "serverless/quiccasa/dev/1615804297769-2021-03-15T10:31:37.769Z/quiccasa.zip"
               },
               "Handler": "index.subscribe",
               "Runtime": "nodejs12.x",
@@ -250,7 +250,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-                "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
+                "S3Key": "serverless/quiccasa/dev/1615804297769-2021-03-15T10:31:37.769Z/quiccasa.zip"
               },
               "Handler": "index.reset",
               "Runtime": "nodejs12.x",
@@ -278,7 +278,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-                "S3Key": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z/quiccasa.zip"
+                "S3Key": "serverless/quiccasa/dev/1615804297769-2021-03-15T10:31:37.769Z/quiccasa.zip"
               },
               "Handler": "index.unsubscribe",
               "Runtime": "nodejs12.x",
@@ -301,44 +301,44 @@
               "UnsubscribeLogGroup"
             ]
           },
-          "CrawlLambdaVersionXv3O22iFq4KT2fl7NkbIdm0Tg4Jd3AeyFfvy5WffyMg": {
+          "CrawlLambdaVersionHb30FABQjZp10mCD2yml4IFIklc4OeOR4dyF7OM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CrawlLambdaFunction"
               },
-              "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
+              "CodeSha256": "VLjsrrVOXWH67a9r4crMtZHWStMgqDyQC/juKyAntlM="
             }
           },
-          "SubscribeLambdaVersionnV289WcdK9X1W1okM3OCzN27S0D6FW1JHRbh4k6EW4w": {
+          "SubscribeLambdaVersionXdgiEmSYys8SMxVDs9h8NCZboEKNMLEsVK5jr83s0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SubscribeLambdaFunction"
               },
-              "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
+              "CodeSha256": "VLjsrrVOXWH67a9r4crMtZHWStMgqDyQC/juKyAntlM="
             }
           },
-          "ResetLambdaVersionkI2PtLXnbyuBQnuQgCEEqEsBTy9Bd2k8jxB3zU0RII": {
+          "ResetLambdaVersionkVyl8Nh9NqGDt7jHDv1yR5rnmB0fLHdHk1cqWt0dAA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ResetLambdaFunction"
               },
-              "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
+              "CodeSha256": "VLjsrrVOXWH67a9r4crMtZHWStMgqDyQC/juKyAntlM="
             }
           },
-          "UnsubscribeLambdaVersiontRr4xUdmKJGTjUddRxFHY5CyCk05wjhiciSq5lKCE": {
+          "UnsubscribeLambdaVersionNMtiXDjcFEOMDzOGjqAdqAyZXV8ojUC66HAVoZhI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UnsubscribeLambdaFunction"
               },
-              "CodeSha256": "uHyN0uBt5U8hQze0ihLDMosRKkSROnMID/qQnPHAp/8="
+              "CodeSha256": "VLjsrrVOXWH67a9r4crMtZHWStMgqDyQC/juKyAntlM="
             }
           },
           "CrawlEventsRuleSchedule1": {
@@ -659,7 +659,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1615803534237": {
+          "ApiGatewayDeployment1615804289838": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -836,25 +836,25 @@
           "CrawlLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CrawlLambdaVersionXv3O22iFq4KT2fl7NkbIdm0Tg4Jd3AeyFfvy5WffyMg"
+              "Ref": "CrawlLambdaVersionHb30FABQjZp10mCD2yml4IFIklc4OeOR4dyF7OM"
             }
           },
           "SubscribeLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SubscribeLambdaVersionnV289WcdK9X1W1okM3OCzN27S0D6FW1JHRbh4k6EW4w"
+              "Ref": "SubscribeLambdaVersionXdgiEmSYys8SMxVDs9h8NCZboEKNMLEsVK5jr83s0"
             }
           },
           "ResetLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ResetLambdaVersionkI2PtLXnbyuBQnuQgCEEqEsBTy9Bd2k8jxB3zU0RII"
+              "Ref": "ResetLambdaVersionkVyl8Nh9NqGDt7jHDv1yR5rnmB0fLHdHk1cqWt0dAA"
             }
           },
           "UnsubscribeLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UnsubscribeLambdaVersiontRr4xUdmKJGTjUddRxFHY5CyCk05wjhiciSq5lKCE"
+              "Ref": "UnsubscribeLambdaVersionNMtiXDjcFEOMDzOGjqAdqAyZXV8ojUC66HAVoZhI"
             }
           },
           "ServiceEndpoint": {
@@ -903,13 +903,13 @@
             "schedule": "cron(0 7-22 ? * SAT-SUN *)"
           }
         ],
+        "timeout": 30,
         "name": "quiccasa-dev-crawl",
         "package": {},
         "memory": 1024,
-        "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CrawlLambdaVersionXv3O22iFq4KT2fl7NkbIdm0Tg4Jd3AeyFfvy5WffyMg"
+        "versionLogicalId": "CrawlLambdaVersionHb30FABQjZp10mCD2yml4IFIklc4OeOR4dyF7OM"
       },
       "subscribe": {
         "handler": "index.subscribe",
@@ -928,7 +928,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SubscribeLambdaVersionnV289WcdK9X1W1okM3OCzN27S0D6FW1JHRbh4k6EW4w"
+        "versionLogicalId": "SubscribeLambdaVersionXdgiEmSYys8SMxVDs9h8NCZboEKNMLEsVK5jr83s0"
       },
       "reset": {
         "handler": "index.reset",
@@ -947,7 +947,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ResetLambdaVersionkI2PtLXnbyuBQnuQgCEEqEsBTy9Bd2k8jxB3zU0RII"
+        "versionLogicalId": "ResetLambdaVersionkVyl8Nh9NqGDt7jHDv1yR5rnmB0fLHdHk1cqWt0dAA"
       },
       "unsubscribe": {
         "handler": "index.unsubscribe",
@@ -966,7 +966,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "UnsubscribeLambdaVersiontRr4xUdmKJGTjUddRxFHY5CyCk05wjhiciSq5lKCE"
+        "versionLogicalId": "UnsubscribeLambdaVersionNMtiXDjcFEOMDzOGjqAdqAyZXV8ojUC66HAVoZhI"
       }
     },
     "resources": {
@@ -1002,7 +1002,7 @@
     "artifact": "/home/marco/apps/aws/quiccasa/.serverless/quiccasa.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/quiccasa/dev/1615803542913-2021-03-15T10:19:02.913Z",
+    "artifactDirectoryName": "serverless/quiccasa/dev/1615804297769-2021-03-15T10:31:37.769Z",
     "artifact": "quiccasa.zip"
   }
 }
