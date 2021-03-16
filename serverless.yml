@@ -5,6 +5,7 @@
 
 service: quiccasa
 frameworkVersion: '2'
+useDotenv: true
 provider:
   name: aws
   runtime: nodejs12.x
@@ -16,7 +17,9 @@ provider:
   region: eu-west-1
   deploymentBucket: quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6
   environment:
-    variable1: value1
+    bucket: ${self:resources.Resources.NewResource.Properties.BucketName}
+    region: ${self:provider.region}
+    service: ${self:service}
   iam:
     role:
       statements:
@@ -69,8 +72,8 @@ functions:
           method: get
           path: unsubscribe
 resources:
- Resources:
-   NewResource:
-     Type: AWS::S3::Bucket
-     Properties:
-       BucketName: quiccasa-bucket-dev
+  Resources:
+    NewResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: quiccasa-bucket-dev
