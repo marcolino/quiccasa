@@ -2,7 +2,7 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^7.21.0",
-    "serverless": "^2.29.0"
+    "serverless": "^2.30.0"
   },
   "name": "quiccasa",
   "scripts": {
@@ -17,5 +17,5 @@
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5"
   },
-  "version": "0.0.5"
+  "version": "0.0.6"
 }
