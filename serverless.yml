@@ -53,6 +53,12 @@ functions:
       - schedule: cron(0/30 6-22 ? * MON-FRI *) # times are GMT
       - schedule: cron(0 7-21 ? * SAT-SUN *) # times are GMT
     timeout: 30 # seconds, default is 6
+  home:
+    handler: index.home
+    events:
+      - http:
+          method: get
+          path: /home
   subscribe:
     handler: index.subscribe
     events:
@@ -71,6 +77,12 @@ functions:
       - http:
           method: get
           path: unsubscribe
+  actionUnsubscribe:
+    handler: index.actionUnsubscribe
+    events:
+      - http:
+          method: get
+          path: actionUnsubscribe
 resources:
   Resources:
     NewResource:

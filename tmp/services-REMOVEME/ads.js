@@ -292,7 +292,7 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                   <p style="margin:0;font-size:14px;line-height:20px;">
                     ${config.companyTitle}
                     <br>
-                    <a class="unsub" href="${config.enpoints.unsubscribe}" style="color:#cccccc;text-decoration:underline;">
+                    <a class="unsub" href="${config.endpoint}unsubscribe.html}" style="color:#cccccc;text-decoration:underline;">
                       Annulla la sottoscrizione
                     </a>
                   </p>

@@ -3,9 +3,12 @@
 const request = require("axios");
 const cheerio = require("cheerio");
 const config = require("../config");
-const { formatMoney } = require("./utils");
+const { formatMoneyNoDecimals } = require("./utils");
 
-module.exports.adsScrape = async (searchParameters) => {
+/**
+ * Scrape all ads from provider's search results
+ */
+ module.exports.adsScrape = async (searchParameters) => {
   const ads = [];
   // TODO: build url from search parameters
   let url = "https://www.immobiliare.it/vendita-case/torino/?criterio=rilevanza&prezzoMinimo=280000&prezzoMassimo=400000&superficieMinima=80&superficieMassima=140&idMZona[]=175&idMZona[]=176&idMZona[]=184&idMZona[]=10407";
@@ -118,6 +121,33 @@ module.exports.adsScrape = async (searchParameters) => {
 
   return ads;
 };
+
+/**
+ * Scrape a single ad
+ */
+ module.exports.adScrape = async(ad) => {
+  let url = ad.url;
+  let response = null;
+  try {
+    response = await request(url);
+//console.log('adScrape response.data:', response.data);
+  } catch(err) {
+    console.error(`error fetching data from url ${url}:`, err);
+    return ad; // TODO: review error handling...
+  }
+
+  const $ = cheerio.load(response.data);
+  //const body = $("body").text();
+//console.log('adScrape body text:', body);
+  ad.missing = $("body").text().match(/L'annuncio non è più presente/is);
+//console.log('adScrape missing:', ad.missing);
+
+  ad.description = $("body").find("div.im-description__text"/*.js-readAllText*/).text().trim();
+
+  ad.phone = $("body").find("a.im-lead__phone:nth-child(2)").attr("href").replace(/tel:/, "").trim();
+
+  return ad;
+}
 
 /**
  * Compare old and new lists of ads
@@ -236,6 +266,11 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                   </td><td style="width:495px;padding-bottom:20px;" valign="top">
                   <![endif]-->
                   <div class="col-lge" style="display:inline-block;width:100%;max-width:495px;vertical-align:top;padding-bottom:20px;font-family:Helvetica,Verdana,Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
+                    ${ad.missing ? `
+                    <p style="font-size:18px;margin-top:0;margin-bottom:4px;color:darkred">
+                      <b><i>NON PIÚ PRESENTE!</i></b>
+                    </p>
+                    ` : ``}
                     <p style="font-size:18px;margin-top:0;margin-bottom:4px;">
                       ${ad.titleStrict}${ad.city ? (", " + ad.city) : ""}
                     </p>
@@ -251,11 +286,21 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                       ${ad.bathrooms ? " | " + ad.bathrooms + " bagn" + (ad.bathrooms <= 1 ? "o" : "i") : ""}
                       ${ad.floor ? " | " + "piano " + ad.floor : ""}
                     </p>
+                    <p style="font-size:11px;margin-top:0;margin-bottom:6px;line-height:99%">
+                      ${ad.description}
+                    </p>
                     <p style="margin:0;margin-top:12px">
                       <a href="${ad.url}" style="background: #c21f00; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;text-underline-color:#c21f00">
                         <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt">&nbsp;</i><![endif]-->
                         <span style="mso-text-raise:10pt;font-weight:bold;">
                           🔍 Vedi i dettagli
+                        </span>
+                        <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%">&nbsp;</i><![endif]-->
+                      </a>
+                      <a href="tel:${ad.phone}" style="background: #c21f00; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;text-underline-color:#c21f00">
+                        <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt">&nbsp;</i><![endif]-->
+                        <span style="mso-text-raise:10pt;font-weight:bold;">
+                          📞 Telefono
                         </span>
                         <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%">&nbsp;</i><![endif]-->
                       </a>
@@ -291,7 +336,8 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                   <p style="margin:0;font-size:14px;line-height:20px;">
                     ${config.companyTitle}
                     <br>
-                    <a class="unsub" href="${config.enpoints.unsubscribe}" style="color:#cccccc;text-decoration:underline;">
+                    <!--<a class="unsub" href="${/*config.endpointWebsite*/'REMOVEME'}unsubscribe.html" style="color:#cccccc;text-decoration:underline;">-->
+                    <a class="unsub" href="${config.endpoint}unsubscribe" style="color:#cccccc;text-decoration:underline;">
                       Annulla la sottoscrizione
                     </a>
                   </p>
@@ -325,7 +371,7 @@ const adsDescribeSearch = (searchParameters) => {
     }
     description += ` ${searchParameters.city ? "a " + searchParameters.city : "in città sconosciuta"}`;
     description += ` ${searchParameters.zones.length <= 0 ? "in zona sconosciuta" : (searchParameters.zones.length === 1 ? "nella zona" : "nelle zone")} ${searchParameters.zones.map(zid => zid[Object.keys(zid)[0]]).join("; ").replace(/; $/, "").trim()}`;
-    description += `, da ${formatMoney(searchParameters.minPrice, config.locale, config.currency).replace(/,.*/, "")} a ${formatMoney(searchParameters.maxPrice, config.locale, config.currency).replace(/,.*/, "")}`;
+    description += `, da ${formatMoneyNoDecimals(searchParameters.minPrice, config.locale, config.currency)} a ${formatMoneyNoDecimals(searchParameters.maxPrice, config.locale, config.currency)}`;
     description += `, da ${searchParameters.minSurfaceMq} m² a ${searchParameters.maxSurfaceMq} m²`;
     description += `, con un criterio di ${searchParameters.criterion}`;
     return description;
