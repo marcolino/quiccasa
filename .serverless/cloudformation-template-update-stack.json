@@ -169,7 +169,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1616074111654-2021-03-18T13:28:31.654Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
         },
         "Handler": "index.crawl",
         "Runtime": "nodejs12.x",
@@ -199,7 +199,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1616074111654-2021-03-18T13:28:31.654Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
         },
         "Handler": "index.home",
         "Runtime": "nodejs12.x",
@@ -229,7 +229,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1616074111654-2021-03-18T13:28:31.654Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
         },
         "Handler": "index.subscribe",
         "Runtime": "nodejs12.x",
@@ -259,7 +259,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1616074111654-2021-03-18T13:28:31.654Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
         },
         "Handler": "index.reset",
         "Runtime": "nodejs12.x",
@@ -289,7 +289,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1616074111654-2021-03-18T13:28:31.654Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
         },
         "Handler": "index.unsubscribe",
         "Runtime": "nodejs12.x",
@@ -319,7 +319,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1616074111654-2021-03-18T13:28:31.654Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
         },
         "Handler": "index.actionUnsubscribe",
         "Runtime": "nodejs12.x",
@@ -344,70 +344,70 @@
         "ActionUnsubscribeLogGroup"
       ]
     },
-    "CrawlLambdaVersionyuoa355jMZdQEJCHvlqmzg0rQWYLBXEYhxMJnzBITg": {
+    "CrawlLambdaVersionq37Dsrf0rMjqOdalG72YA5jRzzFE9oGD6x6n7A1DI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CrawlLambdaFunction"
         },
-        "CodeSha256": "dTD/gkTW1buqOUUhx5yjqoNQk9bOorRt9EQUqX1QWq4="
+        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
       }
     },
-    "HomeLambdaVersionqCEOwMwdzpCIfjUg98yIqHdbKPK4FDuHWU1Xvt24": {
+    "HomeLambdaVersionYVxx8JpNyrkJcqdtmDWR0pPHMGGLPQKo0F6dKPpTw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HomeLambdaFunction"
         },
-        "CodeSha256": "dTD/gkTW1buqOUUhx5yjqoNQk9bOorRt9EQUqX1QWq4="
+        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
       }
     },
-    "SubscribeLambdaVersionYdQsiZGXtGHtPOx8RfYvPM9uzXYewdggyWmZRx4paQo": {
+    "SubscribeLambdaVersionhsdE0tkPk57lKIWVRDZHNUIxN3NqmbRGayVFh4z0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SubscribeLambdaFunction"
         },
-        "CodeSha256": "dTD/gkTW1buqOUUhx5yjqoNQk9bOorRt9EQUqX1QWq4="
+        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
       }
     },
-    "ResetLambdaVersionOXpPqCDv5hOk5TuH5XQatHjIKkH8AJ2KgHZb7JoKIWc": {
+    "ResetLambdaVersionAiEKmJlJ532rVN886nNTYfGKZ9hweWbS9J0vUiIw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ResetLambdaFunction"
         },
-        "CodeSha256": "dTD/gkTW1buqOUUhx5yjqoNQk9bOorRt9EQUqX1QWq4="
+        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
       }
     },
-    "UnsubscribeLambdaVersionqxO7PXXQRnPTy6lUaZaCN10w5zecQ4sfkursbbs": {
+    "UnsubscribeLambdaVersionvfuI5pQ9IFWHFaIjaJmLeO9peYaRoTGWcvvbKWMa44": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UnsubscribeLambdaFunction"
         },
-        "CodeSha256": "dTD/gkTW1buqOUUhx5yjqoNQk9bOorRt9EQUqX1QWq4="
+        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
       }
     },
-    "ActionUnsubscribeLambdaVersionI8bKPQ7qgnfedNMRUMp1KJk5JHFOFElDY0dDq4zLsc": {
+    "ActionUnsubscribeLambdaVersionxVUh74z2soRM5qg7IyJnIpfl5RyEtEcj2CRPkRdCpY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ActionUnsubscribeLambdaFunction"
         },
-        "CodeSha256": "dTD/gkTW1buqOUUhx5yjqoNQk9bOorRt9EQUqX1QWq4="
+        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
       }
     },
     "CrawlEventsRuleSchedule1": {
       "Type": "AWS::Events::Rule",
       "Properties": {
-        "ScheduleExpression": "cron(0/30 6-22 ? * MON-FRI *)",
+        "ScheduleExpression": "cron(0 6-20/3 ? * MON-FRI *)",
         "State": "ENABLED",
         "Targets": [
           {
@@ -444,7 +444,7 @@
     "CrawlEventsRuleSchedule2": {
       "Type": "AWS::Events::Rule",
       "Properties": {
-        "ScheduleExpression": "cron(0 7-21 ? * SAT-SUN *)",
+        "ScheduleExpression": "cron(0 6-20/6 ? * SAT-SUN *)",
         "State": "ENABLED",
         "Targets": [
           {
@@ -838,7 +838,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1616074103308": {
+    "ApiGatewayDeployment1619594437180": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1091,37 +1091,37 @@
     "CrawlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CrawlLambdaVersionyuoa355jMZdQEJCHvlqmzg0rQWYLBXEYhxMJnzBITg"
+        "Ref": "CrawlLambdaVersionq37Dsrf0rMjqOdalG72YA5jRzzFE9oGD6x6n7A1DI"
       }
     },
     "HomeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HomeLambdaVersionqCEOwMwdzpCIfjUg98yIqHdbKPK4FDuHWU1Xvt24"
+        "Ref": "HomeLambdaVersionYVxx8JpNyrkJcqdtmDWR0pPHMGGLPQKo0F6dKPpTw"
       }
     },
     "SubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SubscribeLambdaVersionYdQsiZGXtGHtPOx8RfYvPM9uzXYewdggyWmZRx4paQo"
+        "Ref": "SubscribeLambdaVersionhsdE0tkPk57lKIWVRDZHNUIxN3NqmbRGayVFh4z0"
       }
     },
     "ResetLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ResetLambdaVersionOXpPqCDv5hOk5TuH5XQatHjIKkH8AJ2KgHZb7JoKIWc"
+        "Ref": "ResetLambdaVersionAiEKmJlJ532rVN886nNTYfGKZ9hweWbS9J0vUiIw"
       }
     },
     "UnsubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UnsubscribeLambdaVersionqxO7PXXQRnPTy6lUaZaCN10w5zecQ4sfkursbbs"
+        "Ref": "UnsubscribeLambdaVersionvfuI5pQ9IFWHFaIjaJmLeO9peYaRoTGWcvvbKWMa44"
       }
     },
     "ActionUnsubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ActionUnsubscribeLambdaVersionI8bKPQ7qgnfedNMRUMp1KJk5JHFOFElDY0dDq4zLsc"
+        "Ref": "ActionUnsubscribeLambdaVersionxVUh74z2soRM5qg7IyJnIpfl5RyEtEcj2CRPkRdCpY"
       }
     },
     "ServiceEndpoint": {

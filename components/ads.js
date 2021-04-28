@@ -11,7 +11,8 @@ const { formatMoneyNoDecimals } = require("./utils");
  module.exports.adsScrape = async (searchParameters) => {
   const ads = [];
   // TODO: build url from search parameters
-  let url = "https://www.immobiliare.it/vendita-case/torino/?criterio=rilevanza&prezzoMinimo=280000&prezzoMassimo=400000&superficieMinima=80&superficieMassima=140&idMZona[]=175&idMZona[]=176&idMZona[]=184&idMZona[]=10407";
+  //let url = "https://www.immobiliare.it/vendita-case/torino/?criterio=rilevanza&prezzoMinimo=280000&prezzoMassimo=400000&superficieMinima=80&superficieMassima=140&idMZona[]=175&idMZona[]=176&idMZona[]=184&idMZona[]=10407";
+  let url = "https://www.immobiliare.it/vendita-case/rivoli/?criterio=rilevanza&prezzoMinimo=240000&prezzoMassimo=380000&superficieMinima=80&superficieMassima=140";
   //let n = 0;
   do {
     let response = null;
@@ -130,21 +131,20 @@ const { formatMoneyNoDecimals } = require("./utils");
   let response = null;
   try {
     response = await request(url);
-//console.log('adScrape response.data:', response.data);
   } catch(err) {
-    console.error(`error fetching data from url ${url}:`, err);
-    return ad; // TODO: review error handling...
+    console.error(`error fetching data from url ${url}:`, err); // TODO: review error handling...
+    return ad;
   }
 
   const $ = cheerio.load(response.data);
-  //const body = $("body").text();
-//console.log('adScrape body text:', body);
-  ad.missing = $("body").text().match(/L'annuncio non è più presente/is);
-//console.log('adScrape missing:', ad.missing);
+  ad.missing = $("body");
+  ad.missing = ad.missing ? ad.missing.text().match(/L'annuncio non è più presente/is) : true;
 
-  ad.description = $("body").find("div.im-description__text"/*.js-readAllText*/).text().trim();
+  ad.description = $("body").find("div.im-description__text");
+  ad.description = ad.description ? ad.description.text().trim() : undefined;
 
-  ad.phone = $("body").find("a.im-lead__phone:nth-child(2)").attr("href").replace(/tel:/, "").trim();
+  ad.phone = $("body").find("a.im-lead__phone:nth-child(2)").attr("href");
+  ad.phone = ad.phone ? ad.phone.replace(/tel:/, "").trim() : undefined;
 
   return ad;
 }
@@ -259,13 +259,13 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                   <![endif]-->
                   <div class="col-sml" style="display:inline-block;width:100%;max-width:245px;vertical-align:top;text-align:left;font-family:Helvetica,Verdana,Arial,sans-serif;font-size:14px;color:#363636;">
                     <a href="${ad.url}" style="text-decoration:none;">
-                      <img src="${ad.image}" width="215" alt="" style="width:90%;max-width:215px;margin-bottom:20px;">
+                      <img src="${ad.image}" width="215" alt="" style="width:90%;max-width:215px;">
                     </a>
                   </div>
                   <!--[if mso]>
                   </td><td style="width:495px;padding-bottom:20px;" valign="top">
                   <![endif]-->
-                  <div class="col-lge" style="display:inline-block;width:100%;max-width:495px;vertical-align:top;padding-bottom:20px;font-family:Helvetica,Verdana,Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
+                  <div class="col-lge" style="display:inline-block;width:100%;max-width:495px;vertical-align:top;margin-top:20px;padding-bottom:20px;font-family:Helvetica,Verdana,Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
                     ${ad.missing ? `
                     <p style="font-size:18px;margin-top:0;margin-bottom:4px;color:darkred">
                       <b><i>NON PIÚ PRESENTE!</i></b>
@@ -286,17 +286,19 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
                       ${ad.bathrooms ? " | " + ad.bathrooms + " bagn" + (ad.bathrooms <= 1 ? "o" : "i") : ""}
                       ${ad.floor ? " | " + "piano " + ad.floor : ""}
                     </p>
-                    <p style="font-size:11px;margin-top:0;margin-bottom:6px;line-height:99%">
+                    <p style="font-size:12px;margin-top:0;margin-bottom:6px;_ine-height:0.99em">
                       ${ad.description}
                     </p>
                     <p style="margin:0;margin-top:12px">
+                      <!--
                       <a href="${ad.url}" style="background: #c21f00; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;text-underline-color:#c21f00">
-                        <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt">&nbsp;</i><![endif]-->
+                        <! --[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt">&nbsp;</i><![endif]- ->
                         <span style="mso-text-raise:10pt;font-weight:bold;">
-                          🔍 Vedi i dettagli
+                          🔍 Dettagli
                         </span>
-                        <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%">&nbsp;</i><![endif]-->
+                        <! --[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%">&nbsp;</i><![endif]- ->
                       </a>
+                      -->
                       <a href="tel:${ad.phone}" style="background: #c21f00; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;text-underline-color:#c21f00">
                         <!--[if mso]><i style="letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt">&nbsp;</i><![endif]-->
                         <span style="mso-text-raise:10pt;font-weight:bold;">
@@ -316,7 +318,7 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
               <!-- end new ads loop here -->
               <tr>
                 <td style="padding:30px;background-color:#ffffff;">
-                  <p style="margin-top:0;margin-bottom:16px;text-decoration:none;">
+                  <p style="font-size:12px;font-style:italic;margin-top:0;margin-bottom:16px;text-decoration:none;">
                     La tua ricerca: ${adsDescribeSearch(searchParameters)}.
                   </p>
                 </td>
@@ -370,7 +372,7 @@ const adsDescribeSearch = (searchParameters) => {
       description += `tipologia di ricerca sconosciuta`;
     }
     description += ` ${searchParameters.city ? "a " + searchParameters.city : "in città sconosciuta"}`;
-    description += ` ${searchParameters.zones.length <= 0 ? "in zona sconosciuta" : (searchParameters.zones.length === 1 ? "nella zona" : "nelle zone")} ${searchParameters.zones.map(zid => zid[Object.keys(zid)[0]]).join("; ").replace(/; $/, "").trim()}`;
+    description += `${searchParameters.zones.length <= 0 ? "" : (" " + (searchParameters.zones.length === 1 ? "nella zona" : "nelle zone") + " ")}${searchParameters.zones.map(zid => zid[Object.keys(zid)[0]]).join("; ").replace(/; $/, "").trim()}`;
     description += `, da ${formatMoneyNoDecimals(searchParameters.minPrice, config.locale, config.currency)} a ${formatMoneyNoDecimals(searchParameters.maxPrice, config.locale, config.currency)}`;
     description += `, da ${searchParameters.minSurfaceMq} m² a ${searchParameters.maxSurfaceMq} m²`;
     description += `, con un criterio di ${searchParameters.criterion}`;

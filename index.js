@@ -14,31 +14,34 @@ const adsFileName = "ads.json";
 module.exports.crawl = async (event, context, callback) => {
   console.log("crawl endpoint called");
 
+/*
+criterio=rilevanza&prezzoMinimo=240000&prezzoMassimo=380000&superficieMinima=80&superficieMassima=140
+*/
   const searchParameters = { // TODO: get from subscription service...
     baseUrl: "https://www.immobiliare.it/vendita-case",
-    city: "torino",
+    city: "rivoli", // torino
     zones: [
       //{ 172: "Centro" },
       //{ 173: "Crocetta, San Secondo" },
       //{ 174: "San Salvario" },
-      { 175: "Cavoretto, Gran Madre" },
-      { 176: "Colle della Maddalena, Superga" },
+      ///{ 175: "Cavoretto, Gran Madre" },
+      ///{ 176: "Colle della Maddalena, Superga" },
       //{ 177: "Campidoglio, San Donato, Cit Turin" },
       //{ 178: "Borgo San Paolo, Cenisia" },
       //{ 181: "Lingotto, Nizza Millefonti" },
       //{ 183: "Pozzo Strada, Parella" },
-      { 184: "Aurora, Barriera di Milano, Rebaudengo" },
+      ///{ 184: "Aurora, Barriera di Milano, Rebaudengo" },
       //{ 185: "Regio Parco, Vanchiglia, Vanchiglietta" },
       //{ 187: "Barriera di Lanzo, Falchera, arca, Bettolla" },
       //{ 189: "Borgo Vittoria, Parco Dora" },
       //{ 191: "Le Vallette, Lucento, Madonna di Campagna" },
       //{ 194: "Santa Rita, Mirafiorni Nord" },
       //{ 195: "Mirafiori Sud" },
-      { 10407: "Madonna del Pilone, Sassi" },
+      ///{ 10407: "Madonna del Pilone, Sassi" },
     ],
     criterion: "rilevanza",
-    minPrice: 280000,
-    maxPrice: 400000,
+    minPrice: 240000, // 280000
+    maxPrice: 380000, // 400000
     minSurfaceMq: 80,
     maxSurfaceMq: 140,
     blacklist: {
@@ -59,30 +62,36 @@ module.exports.crawl = async (event, context, callback) => {
     const n = Math.floor(Math.random() * (adsOld.length - 1));
     adsOld[n].url += "-invalidated"; // invalidate one ad, to force it as new and send email
   }
+//adsOld.length = 0; // force all ads to be new
+
   console.log("# ads old:", adsOld.length);
 
   console.log("scraping new ads");
-  const adsNew = await adsScrape(searchParameters);
+  const adsNew = await adsScrape(searchParameters); // scrape ads from provider
   console.log("# ads new:", adsNew.length);
 
-  const news = adsCompare(adsOld, adsNew);
-  console.log("new ads:", news.length);
+  const news = adsCompare(adsOld, adsNew); // compare scraped ads to the previous ads
+  console.log("# ads not matching an old ad:", news.length);
 
-  if (news.length) { // send email to inform of news
-    await Promise.all(news.map(async n => await adScrape(n)));
+  await Promise.all(news.map(async n => await adScrape(n))); // scrape all new ads to complete information
+  const newsFiltered = news.filter(n => n.description !== undefined); // filter out incomplete new ads (possible error from provider)
+  console.log("# ads not matching an old ad after filter:", newsFiltered.length);
+
+  if (newsFiltered.length) { // send email to inform of news
+    //await Promise.all(news.map(async n => await adScrape(n)));
     const result = await sendEmail(
       config.emailRecipientAddresses, // recipient email
       config.emailSenderAddress, // sender email
       emailSubject, // subject
-      adsEmailBodyFormat(news, searchParameters), // html body
+      adsEmailBodyFormat(newsFiltered, searchParameters), // html body
       null, // text body
     );
     if (result.success) { // email sent successfully
       console.log("crawl sendMail returned success");
       await putObjectToS3(adsFileName, adsNew); // save ads new to s3
-      if (callback) callback(null, news); // TODO: used only for non-async calls ?
+      if (callback) callback(null, newsFiltered); // TODO: used only for non-async calls ?
     } else {
-      if (callback) callback(result.error, news); // TODO: used only for non-async calls ?
+      if (callback) callback(result.error, newsFiltered); // TODO: used only for non-async calls ?
     }
   } else { // no new ads; save ads new to s3 nonetheless, since some ads possibly have been removed
     await putObjectToS3(adsFileName, adsNew); // save ads new to s3
@@ -94,7 +103,7 @@ module.exports.crawl = async (event, context, callback) => {
       {
         message: `success`,
         input: event,
-        news,
+        newsFiltered,
       },
       null,
       2
@@ -155,6 +164,9 @@ module.exports.subscribe = async (event) => {
 
   return {
     statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin" : "*", // required for CORS support to work
+    },
     body: JSON.stringify(
       {
         message: `You did successfully subscribe to ${config.service} service`,
