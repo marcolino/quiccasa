@@ -14,7 +14,7 @@ function App() {
         );
         setData(result.data.message);
       } catch (err) {
-        console.error('error:', err);
+        console.error('error:', err);cd
         throw(new Error(`Error: ${err}`));
       }
     }
