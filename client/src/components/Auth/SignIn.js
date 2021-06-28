@@ -23,6 +23,21 @@ const SignIn = () => {
       });
   };
 
+  const federatedSignIn = (e, provider) => {
+    e.preventDefault();
+
+    Auth.federatedSignIn({
+      provider,
+    })
+      .then((user) => {
+        setEmail("");
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="form">
       <h3>Sign In</h3>
@@ -47,6 +62,10 @@ const SignIn = () => {
         </FormElement>
         <button type="submit" onClick={signIn}>
           Sign In
+        </button>
+        <hr />
+        <button type="submit" onClick={(e) => federatedSignIn(e, 'Google')}>
+          Google Sign In
         </button>
       </form>
     </div>

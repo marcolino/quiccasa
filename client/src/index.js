@@ -1,13 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { AuthProvider } from "./providers/authProvider";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
+import theme from "./theme";
 import "./index.css";
 
 let root = document.getElementById('root');
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   root
 );
