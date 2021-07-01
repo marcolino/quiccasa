@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import FormElement from "../FormElement";
 
-const SignUp = () => {
+const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [waitingForCode, setWaitingForCode] = useState(false);
   const [code, setCode] = useState("");
   
-  const signUp = (e) => {
+  const resetPassword = (e) => {
     e.preventDefault();
-    Auth.signUp({ username: email, password, attributes: { email } })
+    Auth.resetPassword({ username: email, password, attributes: { email } })
       .then((data) => {
         console.log(data);
         setWaitingForCode(true);
@@ -21,10 +21,10 @@ const SignUp = () => {
       });
   };
   
-  const confirmSignUp = (e) => {
+  const confirmResetPassword = (e) => {
     e.preventDefault();
     
-    Auth.confirmSignUp(email, code)
+    Auth.confirmResetPassword(email, code)
       .then((data) => {
         console.log(data);
         setWaitingForCode(false);
@@ -35,7 +35,7 @@ const SignUp = () => {
   };
   
   const resendCode = () => {
-    Auth.resendSignUp(email)
+    Auth.resendResetPassword(email)
       .then(() => {
         console.log("code resent successfully");
       })
@@ -67,7 +67,7 @@ const SignUp = () => {
               placeholder="password"
             />
           </FormElement>
-          <button type="submit" onClick={signUp}>
+          <button type="submit" onClick={resetPassword}>
             Sign Up
           </button>
         </form>
@@ -83,7 +83,7 @@ const SignUp = () => {
               placeholder="code"
             />
           </FormElement>
-          <button type="submit" onClick={confirmSignUp}>
+          <button type="submit" onClick={confirmResetPassword}>
             Confirm Sign Up
           </button>
           <button type="button" onClick={resendCode}>
@@ -95,4 +95,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ResetPassword;

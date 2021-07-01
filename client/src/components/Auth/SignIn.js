@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 //import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+//import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,32 +19,46 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
 
+import DividerWithText from "../DividerWithText";
+
 const styles = theme => ({
   paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginTop: theme.spacing(3), // TODO: this should depend on window.height
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.primary.dark,
   },
   form: {
-    width: '100%', // fix IE 11 issue
+    width: "100%", // fix IE 11 issue
     marginTop: theme.spacing(1),
     autocomplete: "off",
   },
   submit: {
     margin: theme.spacing(3, 0, 2, 0),
-    color: 'white',
-    textTransform: 'none',
-    fontSize: '1.4em',
+    color: "white",
+    backgroundColor: theme.palette.success.main,
+    textTransform: "none",
+    fontSize: "1.5em",
   },
-
+  submitFederatedSignInFacebook: {
+    margin: theme.spacing(2, 0, 0, 0),
+    backgroundColor: theme.palette.facebook,
+  },
+  submitFederatedSignInTwitter: {
+    margin: theme.spacing(1, 0, 0, 0),
+    backgroundColor: theme.palette.twitter,
+  },
+  submitFederatedSignInGoogle: {
+    margin: theme.spacing(1, 0, 0, 0),
+    backgroundColor: theme.palette.google,
+  },
   textField: {
     /*width: "25ch",*/
-    fontSize: "1.0em",
+    //fontSize: "1.0em",
     color: "#333",
     backgroundColor: "#fff !important",
     "&::placeholder": {
@@ -67,8 +81,15 @@ const styles = theme => ({
     marginRight: 5,
     paddingLeft: 10,
     paddingRight: 10,
-    borderRight: "1px solid #c5c5c5"
-  }
+    borderRight: "1px solid #c5c5c5",
+  },
+  text: {
+    fontSize: "1.0em",
+  },
+  textLink: {
+    color: theme.palette.success.main,
+    fontSize: "1.1em",
+  },
 });
 const useStyles = makeStyles((theme) => (styles(theme)));
 
@@ -130,6 +151,39 @@ const SignIn = () => {
         </Grid>
 
         <form className={classes.form} noValidate autoComplete="off">
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={`${classes.submit} ${classes.submitFederatedSignInFacebook}`}
+            onClick={(e) => federatedSignIn(e, 'Facebook')}
+          >
+            Facebook Sign In
+          </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={`${classes.submit} ${classes.submitFederatedSignInTwitter}`}
+            onClick={(e) => federatedSignIn(e, 'Twitter')}
+          >
+            Twitter Sign In
+          </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={`${classes.submit} ${classes.submitFederatedSignInGoogle}`}
+            onClick={(e) => federatedSignIn(e, 'Google')}
+          >
+            Google Sign In
+          </Button>
+
+          <DividerWithText> or </DividerWithText>
 
           <TextField
             required
@@ -208,132 +262,50 @@ const SignIn = () => {
             </Grid>
             */}
             <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="/reset-password" variant="body2" className={classes.textLink}>
+                {"Forgot Password?"}
               </Link>
             </Grid>
           </Grid>
           <br />
-          <hr />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={(e) => federatedSignIn(e, 'Google')}
-          >
-            Google Sign In
-          </Button>
+
+          <DividerWithText></DividerWithText>
+
+          <Grid container direction="row" alignItems="center" justify="center" spacing={1}>
+            <Grid item>
+              <Typography className={classes.text}>
+                {"Don't have an account?"} {" "}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Link href="/signup" variant="body2" className={classes.textLink}>
+                {"Register Now!"}
+              </Link>
+            </Grid>
+          </Grid>
+
         </form>
       </div>
-      <Box mt={8}>
+
+      {/*
+      <Box mt={8}> {/* TODO: go to a footer * /}
         <Copyright />
       </Box>
+      */}
+
     </Container>
   );
 }
 
-const Copyright = () => {
-  return (
-    <Typography variant="body2" color="textSecondary" align="right">
-      {'Copyright © '} {new Date().getFullYear()}, {' '}
-      <Link color="inherit" href="https://material-ui.com/">
-        SistemiSolari
-      </Link>{' '}
-    </Typography>
-  );
-}
+// const Copyright = () => {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="right">
+//       {'Copyright © '} {new Date().getFullYear()}, {' '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         SistemiSolari
+//       </Link>{' '}
+//     </Typography>
+//   );
+// }
 
 export default SignIn;
-
-
-/*
-import React, { useState } from "react";
-import { Auth } from "aws-amplify";
-import FormElement from "../FormElement";
-
-const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const signIn = (e) => {
-    e.preventDefault();
-
-    Auth.signIn({
-      username: email,
-      password,
-    })
-      .then((user) => {
-        setEmail("");
-        setPassword("");
-        console.log(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const federatedSignIn = (e, provider) => {
-    e.preventDefault();
-
-    Auth.federatedSignIn({
-      provider,
-    })
-      .then((user) => {
-        setEmail("");
-        console.log(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  return (
-
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-
-        <form>
-          <div className="form-group">
-            <FormElement label="Email" forId="sign-in-email">
-              <input
-                id="sign-in-email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="email"
-                autoComplete="email"
-              />
-            </FormElement>
-          </div>
-          <FormElement label="Password" forId="sign-in-password">
-            <input
-              id="sign-in-password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="password"
-              autoComplete="current-password"
-            />
-          </FormElement>
-          <button type="submit" onClick={signIn}>
-            Sign In
-          </button>
-          <hr />
-          <button type="submit" onClick={(e) => federatedSignIn(e, 'Google')}>
-            Google Sign In
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-};
-
-export default SignIn;
-*/
