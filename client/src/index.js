@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { AuthProvider } from "./providers/authProvider";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { AuthProvider } from "./providers/AuthProvider";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
@@ -11,6 +12,7 @@ let root = document.getElementById('root');
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <AuthProvider>
         <App />
       </AuthProvider>

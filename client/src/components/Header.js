@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -24,6 +24,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import SignInIcon from "@material-ui/icons/ExitToApp";
 import SignUpIcon from "@material-ui/icons/AccountBox";
 import LogoutIcon from "@material-ui/icons/LockOpen";
+
+import { AuthProvider } from "../providers/AuthProvider";
 
 // // importing views
 // import Home from "./Home";
@@ -71,7 +73,10 @@ function HideOnScroll(props) {
 }
 
 const Header = (props) => {
-  const [auth, setAuth] = React.useState(false);
+  //const [auth, setAuth] = React.useState(false);
+  //const auth = React.useContext();
+  const isAuth = useContext(AuthProvider);
+
   const classes = useStyles();
   const [anchor, setAnchor] = React.useState(null);
   const open = Boolean(anchor);
@@ -94,17 +99,17 @@ const Header = (props) => {
       href: "/searches",
     },
   ];
-  if (!auth) menuItems.push({
+  if (!isAuth) menuItems.push({
     label: "Sign In",
     icon: <SignInIcon />,
     href: "/signin",
   });
-  if (!auth) menuItems.push({
+  if (!isAuth) menuItems.push({
     label: "Sign Up",
     icon: <SignUpIcon />,
     href: "/signup",
   });
-  if (auth) menuItems.push({
+  if (isAuth) menuItems.push({
     label: "Logout",
     icon: <LogoutIcon />,
     href: "/logout",
