@@ -8,7 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
 import "./index.css";
 
-let root = document.getElementById('root');
+const root = document.getElementById('root');
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

@@ -22,7 +22,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 //import AccountBox from "@material-ui/icons/AccountBox";
 import SignInIcon from "@material-ui/icons/ExitToApp";
-import SignUpIcon from "@material-ui/icons/AccountBox";
+//import SignUpIcon from "@material-ui/icons/AccountBox";
 import LogoutIcon from "@material-ui/icons/LockOpen";
 
 import { AuthProvider } from "../providers/AuthProvider";
@@ -86,7 +86,6 @@ const Header = (props) => {
     setAnchor(event.currentTarget);
   };
 
-  //setAuth(true);
   const menuItems = [
     {
       label: "Home",
@@ -103,11 +102,6 @@ const Header = (props) => {
     label: "Sign In",
     icon: <SignInIcon />,
     href: "/signin",
-  });
-  if (!isAuth) menuItems.push({
-    label: "Sign Up",
-    icon: <SignUpIcon />,
-    href: "/signup",
   });
   if (isAuth) menuItems.push({
     label: "Logout",

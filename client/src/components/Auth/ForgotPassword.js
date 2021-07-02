@@ -1,37 +1,50 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import FormElement from "../FormElement";
 
-const ResetPassword = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [waitingForCode, setWaitingForCode] = useState(false);
   const [code, setCode] = useState("");
-  
-  const resetPassword = (e) => {
+  const history = useHistory();
+
+  const forgotPassword = (e) => {
     e.preventDefault();
-    Auth.resetPassword({ username: email, password, attributes: { email } })
+    Auth.forgotPassword(email)
       .then((data) => {
         console.log(data);
         setWaitingForCode(true);
         setPassword("");
+        switch (data.CodeDeliveryDetails.DeliveryMedium) {
+          default: // TODO: ... treat EMAIL/SMS/... separately ?
+            alert(`Verification code sent via ${data.CodeDeliveryDetails.AttributeName} to ${data.CodeDeliveryDetails.Destination}.\nPlease open it and copy and paste it here.`); // TODO: ...
+        }
       })
       .catch((err) => {
+        alert(err.message);
         console.log(err);
       });
   };
   
-  const confirmResetPassword = (e) => {
+  const confirmForgotPassword = (e) => {
     e.preventDefault();
     
-    Auth.confirmResetPassword(email, code)
+    Auth.forgotPasswordSubmit(email, code, password)
       .then((data) => {
         console.log(data);
         setWaitingForCode(false);
         setEmail("");
         setCode("");
+        if (data) alert("Password reset successfully") ; // TODO...
+        history.push("/signin");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err.message);
+        console.log(err);
+      })
+    ;
   };
   
   const resendCode = () => {
@@ -39,17 +52,18 @@ const ResetPassword = () => {
       .then(() => {
         console.log("code resent successfully");
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        alert(err.message);
+        console.log(err);
       });
   };
   
   return (
     <div className="form">
-      <h3>Sign Up</h3>
+      <h3>Reset Password</h3>
       {!waitingForCode && (
         <form>
-          <FormElement label="Email" forId="sign-up-email">
+          <FormElement label="Your email" forId="sign-up-email">
             <input
               id="sign-up-email"
               type="email"
@@ -58,23 +72,23 @@ const ResetPassword = () => {
               placeholder="email"
             />
           </FormElement>
-          <FormElement label="Password" forId="sign-up-email">
+          <button type="submit" onClick={forgotPassword}>
+            Reset password
+          </button>
+        </form>
+      )}
+      {waitingForCode && (
+        <form>
+          <FormElement label="New password" forId="new-password">
             <input
-              id="sign-up-password"
+              id="new-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="password"
             />
           </FormElement>
-          <button type="submit" onClick={resetPassword}>
-            Sign Up
-          </button>
-        </form>
-      )}
-      {waitingForCode && (
-        <form>
-          <FormElement label="Confirmation Code" forId="sign-up-code">
+          <FormElement label="Confirmation code" forId="sign-up-code">
             <input
               id="sign-up-code"
               type="text"
@@ -83,8 +97,8 @@ const ResetPassword = () => {
               placeholder="code"
             />
           </FormElement>
-          <button type="submit" onClick={confirmResetPassword}>
-            Confirm Sign Up
+          <button type="submit" onClick={confirmForgotPassword}>
+            Confirm to reset password
           </button>
           <button type="button" onClick={resendCode}>
             Resend code
@@ -95,4 +109,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ForgotPassword;

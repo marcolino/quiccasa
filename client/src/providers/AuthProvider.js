@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 
-const {Provider, Consumer} = React.createContext();
+const initialState = { authorized: false, user: null };
+
+const AuthContext = createContext(initialState);
 
 const AuthProvider = (props) => {
-  const [auth, setAuth] = useState({authorized: false});
+  const [auth, setAuth] = useState(initialState);
 
-  const authorize = (how) => {
-    setAuth({authorized: how});
-  }
+  const authorize = (authorized, user) => {
+    setAuth({authorized, user});
+  } 
 
   return (
-    <Provider value={{auth, authorize}}>
+    <AuthContext.Provider value={{ auth, authorize }}>
       {props.children}
-    </Provider>
+    </AuthContext.Provider>
   )
-}
+};
 
-export {AuthProvider, Consumer as AuthConsumer};
+export { AuthProvider, AuthContext };

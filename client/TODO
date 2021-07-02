@@ -1,0 +1,15 @@
+- remove components/FormElement.js
+- add components/FormElement.js from SignIn.js component
+- persist auth across page reloads:
+
+rememberLogin
+     ? Auth.configure({ storage: localStorage })
+     : Auth.configure({ storage: sessionStorage });
+
+   try {
+     const awsUser = await Auth.signIn(username, password);
+     console.log({ awsUser });
+   } catch (error) {
+     console.log("error signing up:", error);
+   }
+};

@@ -3,7 +3,7 @@ import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-u
 import indigo from '@material-ui/core/colors/indigo';
 import lime from '@material-ui/core/colors/lime';
 import red from '@material-ui/core/colors/red';
-import blue from '@material-ui/core/colors/blue';
+//import blue from '@material-ui/core/colors/blue';
 import grey from '@material-ui/core/colors/grey';
 
 // import RobotoWoff2 from './assets/fonts/roboto-v27-latin-regular.woff2';
@@ -77,9 +77,9 @@ export default createMuiTheme({
       main: '#eaedf0',
       dark: grey[800],
     },
-    facebook: blue[400],
-    twitter: blue[200],
-    google: red[400],
+    facebook: '#1877f2',
+    twitter: '#1da1f2',
+    google: '#db4437',
   },
   status: {
     danger: red[700],

@@ -1,5 +1,6 @@
-//import React from "react";
+import React, {useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles(theme => ({
 	home: {
@@ -8,61 +9,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home() {
 	const classes = useStyles();
+  const { auth } = useContext(AuthContext)
+
   return (
     <div className={classes.home}>
-      <h1>Your home 1</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-      <h1>Your home</h1>
-    </div>
+      {`Home for ${auth.authorized ? 'authorized' : 'guest'} user`}
+   </div>
   );
 }

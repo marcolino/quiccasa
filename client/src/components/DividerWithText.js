@@ -7,8 +7,8 @@ const styles = theme => ({
     alignItems: "center",
     paddingLeft: "0.2em",
     paddingRight: "0.2em",
-    marginTop: "1em",
-    marginBottom: "1em",
+    marginTop: "1.5em",
+    marginBottom: "1.5em",
   },
   border: {
     borderBottom: "1px solid #888",
@@ -18,7 +18,7 @@ const styles = theme => ({
   content: {
     fontSize: "1.1em",
     color: "#888",
-    padding: "0 1em 0 1em",
+    padding: "0 0.5em 0 0.5em",
   },
 });
 const useStyles = makeStyles((theme) => (styles(theme)));

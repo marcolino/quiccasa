@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
+//import { I18n as AwsAmplifyI18n } from 'aws-amplify';
+//import AmplifyI18n from "amplify-i18n";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -18,12 +20,18 @@ import Container from "@material-ui/core/Container";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
+import {
+  FacebookIcon,
+  TwitterIcon,
+  GoogleIcon,
+} from "../FederatedSigninIcons";
 
 import DividerWithText from "../DividerWithText";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const styles = theme => ({
   paper: {
-    marginTop: theme.spacing(3), // TODO: this should depend on window.height
+    marginTop: theme.spacing(1), // TODO: this should depend on window.height
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -47,14 +55,23 @@ const styles = theme => ({
   submitFederatedSignInFacebook: {
     margin: theme.spacing(2, 0, 0, 0),
     backgroundColor: theme.palette.facebook,
+    justifyContent: 'flex-start',
+    paddingLeft: theme.spacing(5),
+    fontSize: "1.2em",
   },
   submitFederatedSignInTwitter: {
     margin: theme.spacing(1, 0, 0, 0),
     backgroundColor: theme.palette.twitter,
+    justifyContent: 'flex-start',
+    paddingLeft: theme.spacing(5),
+    fontSize: "1.2em",
   },
   submitFederatedSignInGoogle: {
     margin: theme.spacing(1, 0, 0, 0),
     backgroundColor: theme.palette.google,
+    justifyContent: 'flex-start',
+    paddingLeft: theme.spacing(5),
+    fontSize: "1.2em",
   },
   textField: {
     /*width: "25ch",*/
@@ -98,15 +115,27 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const { auth, authorize } = useContext(AuthContext)
+
+  console.log('auth 1:', auth);
+  // if (auth.authorized) { // TODO ...
+  //   alert("You are already signed in. Do you really want to sign ing again?");
+  // }
 
   const signIn = (e) => {
     e.preventDefault();
+
+    //const locales = ["en", "fr", "de", "it"];
+    //AmplifyI18n.configure(locales);
+    //AwsAmplifyI18n.setLanguage("it");
 
     Auth.signIn({
       username: email,
       password,
     })
       .then((user) => {
+        authorize(true, user);
+        console.log('auth 2:', auth);
         setEmail("");
         setPassword("");
         console.log("user:", user);
@@ -158,9 +187,10 @@ const SignIn = () => {
             variant="contained"
             color="primary"
             className={`${classes.submit} ${classes.submitFederatedSignInFacebook}`}
+            startIcon={<FacebookIcon />}
             onClick={(e) => federatedSignIn(e, 'Facebook')}
           >
-            Facebook Sign In
+            Sign in with Facebook
           </Button>
           <Button
             type="submit"
@@ -168,19 +198,20 @@ const SignIn = () => {
             variant="contained"
             color="primary"
             className={`${classes.submit} ${classes.submitFederatedSignInTwitter}`}
+            startIcon={<TwitterIcon />}
             onClick={(e) => federatedSignIn(e, 'Twitter')}
           >
-            Twitter Sign In
+            Sign in with Twitter
           </Button>
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             className={`${classes.submit} ${classes.submitFederatedSignInGoogle}`}
+            startIcon={<GoogleIcon />}
             onClick={(e) => federatedSignIn(e, 'Google')}
           >
-            Google Sign In
+            Sign in with Google
           </Button>
 
           <DividerWithText> or </DividerWithText>
@@ -262,7 +293,7 @@ const SignIn = () => {
             </Grid>
             */}
             <Grid item>
-              <Link href="/reset-password" variant="body2" className={classes.textLink}>
+              <Link href="/forgot-password" variant="body2" className={classes.textLink}>
                 {"Forgot Password?"}
               </Link>
             </Grid>
