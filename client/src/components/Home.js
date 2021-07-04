@@ -9,11 +9,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home() {
 	const classes = useStyles();
-  const { auth } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext);
 
   return (
     <div className={classes.home}>
-      {`Home for ${auth.authorized ? 'authorized' : 'guest'} user`}
+      {`Home for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user`}
    </div>
   );
 }

@@ -12,7 +12,7 @@ export default function NotFound() {
 
   return (
     <div className={classes.notFound}>
-      <h1>Page not found, sorry</h1>
+      <h1>Page not found, sorry.</h1>
     
       <Link href="/" variant="body2" className={classes.notFound}>
         <h3>Go back to home page</h3>

@@ -1,22 +1,18 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
-//import { I18n as AwsAmplifyI18n } from 'aws-amplify';
-//import AmplifyI18n from "amplify-i18n";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-//import FormControlLabel from "@material-ui/core/FormControlLabel";
-//import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-//import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-//import Input from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
@@ -25,7 +21,6 @@ import {
   TwitterIcon,
   GoogleIcon,
 } from "../FederatedSigninIcons";
-
 import DividerWithText from "../DividerWithText";
 import { AuthContext } from "../../providers/AuthProvider";
 
@@ -46,7 +41,7 @@ const styles = theme => ({
     autocomplete: "off",
   },
   submit: {
-    margin: theme.spacing(3, 0, 2, 0),
+    margin: theme.spacing(3, 0, 1, 0),
     color: "white",
     backgroundColor: theme.palette.success.main,
     textTransform: "none",
@@ -74,8 +69,6 @@ const styles = theme => ({
     fontSize: "1.2em",
   },
   textField: {
-    /*width: "25ch",*/
-    //fontSize: "1.0em",
     color: "#333",
     backgroundColor: "#fff !important",
     "&::placeholder": {
@@ -86,9 +79,6 @@ const styles = theme => ({
     "& .MuiOutlinedInput-root": {
       backgroundColor: "#fff",
     },
-    // form: {
-    //   autocomplete: "off",
-    // },
   },
   startAdornment: {
     backgroundColor: "#eaedf0",
@@ -101,12 +91,25 @@ const styles = theme => ({
     borderRight: "1px solid #c5c5c5",
   },
   text: {
-    fontSize: "1.0em",
+    fontSize: "1.1em",
   },
-  textLink: {
+  link: {
     color: theme.palette.success.main,
     fontSize: "1.1em",
   },
+  rememberMe: {
+    marginLeft: theme.spacing(0.2),
+    color: theme.palette.success.main,
+  },
+  rememberMeLabel: {
+    fontSize: "0.875em",
+  },
+  forgotPassword: {
+    fontSize: "1em",
+    marginLeft: "auto",
+    marginRight: theme.spacing(0.2),
+    color: theme.palette.success.main,
+  }
 });
 const useStyles = makeStyles((theme) => (styles(theme)));
 
@@ -115,34 +118,28 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const { auth, authorize } = useContext(AuthContext)
-
-  console.log('auth 1:', auth);
-  // if (auth.authorized) { // TODO ...
-  //   alert("You are already signed in. Do you really want to sign ing again?");
-  // }
+  const { auth, setAuth } = useContext(AuthContext);
+  const [rememberMe, setRememberMe] = useState(true); // TODO: get from user choice
 
   const signIn = (e) => {
     e.preventDefault();
-
-    //const locales = ["en", "fr", "de", "it"];
-    //AmplifyI18n.configure(locales);
-    //AwsAmplifyI18n.setLanguage("it");
 
     Auth.signIn({
       username: email,
       password,
     })
       .then((user) => {
-        authorize(true, user);
-        console.log('auth 2:', auth);
+        console.info('signin user:', auth);
+        setAuth({isAuthenticated: true, user});
+        if (!rememberMe) {
+          localStorage.clear();
+        }
         setEmail("");
         setPassword("");
-        console.log("user:", user);
         history.push("/");
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -154,10 +151,9 @@ const SignIn = () => {
     })
       .then((user) => {
         setEmail("");
-        console.log("user:", user);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -174,7 +170,7 @@ const SignIn = () => {
           </Grid>
           <Grid item>
             <Typography component="h1" variant="h5">
-              Sign in
+              {"Sign in"}
             </Typography>
           </Grid>
         </Grid>
@@ -190,7 +186,7 @@ const SignIn = () => {
             startIcon={<FacebookIcon />}
             onClick={(e) => federatedSignIn(e, 'Facebook')}
           >
-            Sign in with Facebook
+            {"Sign in with Facebook"}
           </Button>
           <Button
             type="submit"
@@ -201,7 +197,7 @@ const SignIn = () => {
             startIcon={<TwitterIcon />}
             onClick={(e) => federatedSignIn(e, 'Twitter')}
           >
-            Sign in with Twitter
+            {"Sign in with Twitter"}
           </Button>
           <Button
             type="submit"
@@ -211,10 +207,10 @@ const SignIn = () => {
             startIcon={<GoogleIcon />}
             onClick={(e) => federatedSignIn(e, 'Google')}
           >
-            Sign in with Google
+            {"Sign in with Google"}
           </Button>
 
-          <DividerWithText> or </DividerWithText>
+          <DividerWithText> {"or"} </DividerWithText>
 
           <TextField
             required
@@ -249,7 +245,6 @@ const SignIn = () => {
             margin="normal"
             fullWidth
             id="password"
-            //name="password"
             //label="Password"
             size="small"
             className={classes.textField}
@@ -268,12 +263,7 @@ const SignIn = () => {
               ),
             }}
           />
-          {/*
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          */}
+
           <Button
             type="submit"
             fullWidth
@@ -282,23 +272,35 @@ const SignIn = () => {
             className={classes.submit}
             onClick={(e) => signIn(e)}
           >
-            Sign In
+            {"Sign In"}
           </Button>
-          <Grid container justify="flex-end">
-            {/*
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+
+          <Grid container alignItems="center">
+            <Grid className={classes.rememberMe}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className={classes.rememberMe}
+                    color="primary"
+                    size="small"
+                  />
+                }
+                _label={"Remember me"}
+                label={
+                  <Typography className={classes.rememberMeLabel}>
+                    {"Remember me"}
+                  </Typography>
+                }
+              />
             </Grid>
-            */}
-            <Grid item>
-              <Link href="/forgot-password" variant="body2" className={classes.textLink}>
+            <Grid className={classes.forgotPassword}>
+              <Link href="/forgot-password" className={classes.forgotPassword}>
                 {"Forgot Password?"}
               </Link>
             </Grid>
           </Grid>
-          <br />
 
           <DividerWithText></DividerWithText>
 
@@ -309,7 +311,7 @@ const SignIn = () => {
               </Typography>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2" className={classes.textLink}>
+              <Link href="/signup" className={classes.link}>
                 {"Register Now!"}
               </Link>
             </Grid>

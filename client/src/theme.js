@@ -1,6 +1,7 @@
 //import { createMuiTheme } from "@material-ui/core/styles";
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core/styles"; // TODO: temporary, to solve material-ui drawer "findDOMNode is deprecated in StrictModefindDOMNode is deprecated in StrictMode" warning
-import indigo from '@material-ui/core/colors/indigo';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+//import indigo from '@material-ui/core/colors/indigo';
 import lime from '@material-ui/core/colors/lime';
 import red from '@material-ui/core/colors/red';
 //import blue from '@material-ui/core/colors/blue';
@@ -63,9 +64,9 @@ export default createMuiTheme({
   },
   palette: {
     primary: {
-      light: indigo[200],
-      main: indigo[300],
-      dark: indigo[400],
+      light: blueGrey[100],
+      main: blueGrey[200],
+      dark: blueGrey[300],
     },
     secondary: {
       light: lime[200],

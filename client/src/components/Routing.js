@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Route, Switch } from "react-router";
 import Amplify from "aws-amplify";
@@ -12,6 +12,7 @@ import News from "./News";
 import Blog from "./Blog";
 import Post from "./Post";
 import NotFound from "./NotFound";
+import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -25,42 +26,51 @@ const useStyles = makeStyles(theme => ({
 
 export default function Routing() {
 	const classes = useStyles();
-
-  const isLocalhost = Boolean(
-    window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
-  );
-  
-  const oauth = {
-    domain: 'sistemisolari.auth.eu-west-1.amazoncognito.com',
-    scope: ['phone', 'email', 'profile', 'openid'/*, 'aws.cognito.signin.user.admin'*/],
-    responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
-  };
-  if (isLocalhost) {
-    oauth.redirectSignIn = 'http://localhost:3000/';
-    oauth.redirectSignOut = 'http://localhost:3000/';
-  } else {
-    oauth.redirectSignIn = 'https://quiccasa.sistemisolari.com/';
-    oauth.redirectSignOut = 'https://quiccasa.sistemisolari.com/';
-  }
+  const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log('AC:', Amplify.configure({
+    console.log("CONFIGURING AMPLIFY");
+
+    const isLocalhost = Boolean(
+      window.location.hostname === 'localhost' ||
+      // [::1] is the IPv6 localhost address.
+      window.location.hostname === '[::1]' ||
+      // 127.0.0.1/8 is considered localhost for IPv4.
+      window.location.hostname.match(
+        /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+      )
+    );
+  
+    const oauth = {
+      domain: 'sistemisolari.auth.eu-west-1.amazoncognito.com',
+      scope: ['phone', 'email', 'profile', 'openid'/*, 'aws.cognito.signin.user.admin'*/],
+      responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
+    };
+
+    Amplify.configure({
       Auth: {
-        oauth,
+        oauth: {...oauth,
+          redirectSignIn:  isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
+          redirectSignOut:  isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
+        },
         region: process.env.REACT_APP_REGION,
         userPoolId: process.env.REACT_APP_USER_POOL_ID,
         userPoolWebClientId: process.env.REACT_APP_USER_POOL_WEB_CLIENT_ID,
-        storage: localStorage, // remember me
-        //storage: sessionStorage, // forget me TODO
+        storage: localStorage,
       },
-    }));
-  });
+    });
+
+    Amplify.I18n.setLanguage('it'); // TODO ...
+
+    Amplify.Auth.currentAuthenticatedUser()
+    .then(user => {
+      console.log('currentAuthenticatedUser:', user);
+      setAuth({isAuthenticated: true, user});
+    })
+    .catch(err => console.log(err));
+  
+  }, [setAuth]);
+
   return (
     <section className={classes.section}>
       <Switch>

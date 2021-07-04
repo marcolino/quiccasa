@@ -1,13 +1,17 @@
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignOut = () => {
   const history = useHistory();
+  const { setAuth } = useContext(AuthContext);
 
   Auth.signOut()
     .then((data) => {
       console.log('signed out');
-      history.push("/signin");
+      setAuth({isAuthenticated: false, user: null})
+      history.push("/");
     })
     .catch((err) => {
       alert(err.message);
