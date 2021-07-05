@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
-    "env-crypt": "gpg -c .env",
+    "env-crypt": "gpg -c --no-symkey-cache .env",
     "env-decrypt": "gpg -d .env.gpg",
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true"
   },
