@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -21,10 +21,11 @@
   "scripts": {
     "start": "react-scripts start",
     "start-production": "yarn build && serve -s build",
+    "pre-build": "cp git-hooks/pre-push .git/hooks/pre-push; chmod 700 .git/hooks/pre-push",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
-    "env-crypt": "gpg -c --no-symkey-cache .env",
+    "NO-env-crypt": "gpg -c --no-symkey-cache .env",
     "env-decrypt": "gpg -d .env.gpg",
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true"
   },
