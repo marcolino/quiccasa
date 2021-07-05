@@ -11,9 +11,10 @@ export default function Home() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
 
+  //console.log('AUTH:', auth);
   return (
     <div className={classes.home}>
-      {`Home for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user`}
+      {`Home for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user ${auth.isAuthenticated ? auth.user.attributes.email : ''}`}
    </div>
   );
 }

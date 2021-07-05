@@ -78,6 +78,16 @@ export default createMuiTheme({
       main: '#eaedf0',
       dark: grey[800],
     },
+    headerBackground: {
+      light: blueGrey[100],
+      main: blueGrey[200],
+      dark: blueGrey[300],
+    },
+    headerForeground: {
+      light: grey[500],
+      main: grey[700],
+      dark: grey[900],
+    },
     facebook: '#1877f2',
     twitter: '#1da1f2',
     google: '#db4437',

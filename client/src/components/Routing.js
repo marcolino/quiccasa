@@ -6,11 +6,10 @@ import Home from "./Home";
 import SignUp from "./Auth/SignUp";
 import SignIn from "./Auth/SignIn";
 import SignOut from "./Auth/SignOut";
+import Profile from "./Auth/Profile";
 import ForgotPassword from "./Auth/ForgotPassword";
 import Searches from "./Searches";
-import News from "./News";
-import Blog from "./Blog";
-import Post from "./Post";
+import Listings from "./Listings";
 import NotFound from "./NotFound";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -77,12 +76,11 @@ export default function Routing() {
         <Route path="/" exact component={Home} />
         <Route path="/signup" component={SignUp} />
         <Route path="/signin" component={SignIn} />
+        <Route path="/profile" component={Profile} />
         <Route path="/signout" component={SignOut} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/searches" component={Searches} />
-        <Route path="/news" component={News} />
-        <Route path="/blog" component={Blog} />
-        <Route path="/post/:slug" component={Post} />
+        <Route path="/listings" component={Listings} />
         <Route component={NotFound}/>
       </Switch>
     </section>

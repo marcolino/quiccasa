@@ -1,239 +1,210 @@
-import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import React, { useState, useEffect, useContext } from "react";
+import { makeStyles, AppBar, Button, Drawer, IconButton, Link, MenuItem, Toolbar } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+import { Link as RouterLink } from "react-router-dom";
+import IconCustom from "./IconCustom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
+  root: {
     flexGrow: 1,
   },
+  offset: theme.mixins.toolbar,
+  header: {
+    //backgroundColor: "#400CCC",
+    backgroundColor: theme.palette.headerBackground.light,
+    color: theme.palette.headerForeground.dark,
+    paddingRight: "1em", //"79px",
+    paddingLeft: "1em", //"118px",
+    "@media (max-width: 900px)": {
+      paddingLeft: 0,
+    },
+  },
   menuButton: {
-    marginRight: theme.spacing(2),
+    // fontFamily: "Open Sans, sans-serif",
+    // fontWeight: 700,
+    // size: "18px",
+    // marginLeft: "38px",
+    paddingLeft: "2em",
+    paddingRight: "2em",
+    marginLeft: "1em",
+    marginRight: "1em",
+    backgroundColor: theme.palette.headerBackground.dark,
+    textTransform: 'none',
   },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
   },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+  drawerContainer: {
+    padding: "1em 1em",
   },
 }));
 
-const Header = () => {
+export default function Header() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const { auth } = useContext(AuthContext);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [state, setState] = useState({
+    mobileView: false,
+    drawerOpen: false,
+  });
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+  const { mobileView, drawerOpen } = state;
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const handleOpenDrawer = (event) => {
-  };
-
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+  let headersData = [
+    {
+      label: "Searches",
+      href: "/searches",
+    },
+    {
+      label: "Listings",
+      href: "/listings",
+    },
+  ];
+  headersData = headersData.concat(
+    auth.isAuthenticated ? [
+      {
+        label: "Log Out",
+        href: "/signout",
+      }, {
+        label: "Profile",
+        href: "/profile",
+      },
+    ] : [
+      {
+        label: "Sign in",
+        href: "/signin",
+      },
+      {
+        label: "Sign up",
+        href: "/signup",
+      },
+    ]
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+  useEffect(() => {
+    const setResponsiveness = () => {
+      return window.innerWidth < 900
+        ? setState((prevState) => ({ ...prevState, mobileView: true }))
+        : setState((prevState) => ({ ...prevState, mobileView: false }));
+    };
+
+    setResponsiveness();
+
+    window.addEventListener("resize", () => setResponsiveness());
+
+    return () => {
+      window.removeEventListener("resize", () => setResponsiveness());
+    };
+  }, []);
+
+  const displayDesktop = () => {
+    return (
+      <Toolbar className={classes.toolbar}>
+        <RouterLink to="/">
+          <IconCustom name="logo-main" size={40} />
+        </RouterLink>
+        <div>{getMenuButtons()}</div>
+      </Toolbar>
+    );
+  };
+
+  const displayMobile = () => {
+    const handleDrawerOpen = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    const handleDrawerClose = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: false }));
+
+    return (
+      <Toolbar>
         <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
+          {...{
+            edge: "start",
+            color: "inherit",
+            "aria-label": "menu",
+            "aria-haspopup": "true",
+            onClick: handleDrawerOpen,
+          }}
         >
-          <AccountCircle />
+          <MenuIcon />
         </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+
+        <Drawer
+          {...{
+            anchor: "left",
+            open: drawerOpen,
+            onClose: handleDrawerClose,
+          }}
+        >
+          <div className={classes.drawerContainer}>{getDrawerChoices()}</div>
+        </Drawer>
+
+        <RouterLink to="/">
+          <IconCustom name="logo-main" size={32} />
+        </RouterLink>
+
+      </Toolbar>
+    );
+  };
+
+  const getDrawerChoices = () => {
+    return headersData.map(({ label, href }) => {
+      return (
+        <Link
+          {...{
+            component: RouterLink,
+            to: href,
+            color: "inherit",
+            style: { textDecoration: "none" },
+            key: label,
+          }}
+        >
+          <MenuItem>{label}</MenuItem>
+        </Link>
+      );
+    });
+  };
+
+  // const LogoMain = (props) => {
+  //   const size = props.size ? props.size : 32;
+  //   return (
+  //     <img src={ImageLogoMain} alt="Logo" width={size} height={size} />
+  //   );
+  // };
+
+//  <IconCustom icon={ICONS.LOGO_MAIN} size="32" />
+  // <div className={logoContainer}>
+    //   <img src={mainLogo} style={nbStyle.logo} alt="Main logo"/>
+    // </div>
+
+  const getMenuButtons = () => {
+    return headersData.map(({ label, href }) => {
+      return (
+        <Button
+          {...{
+            key: label,
+            color: "inherit",
+            to: href,
+            component: RouterLink,
+            className: classes.menuButton,
+          }}
+        >
+          {label}
+        </Button>
+      );
+    });
+  };
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleOpenDrawer}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            {"Quiccasa"}
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+    <div className={classes.root}>
+      <header>
+        <AppBar className={classes.header} elevation={10} position="fixed">
+          {mobileView ? displayMobile() : displayDesktop()}
+        </AppBar>
+      </header>
+      <div className={classes.offset} />
     </div>
   );
 }
-
-
-export default Header;

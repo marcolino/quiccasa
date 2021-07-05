@@ -3,17 +3,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles(theme => ({
-	searches: {
+	listings: {
 	},
 }));
 
-export default function Searches() {
+export default function Listings() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
 
   return (
-    <div className={classes.searches}>
-      {`Searches for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user`}
+    <div className={classes.listings}>
+      {`Listings for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user`}
    </div>
   );
 }

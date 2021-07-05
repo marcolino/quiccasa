@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# Run the following command in the root of your project to install this pre-push hook:
+# cp git-hooks/pre-push .git/hooks/pre-push; chmod 700 .git/hooks/pre-push
+
+if [ ! -f ".env" ]; then
+  echo "No .env file found"
+  exit 0
+fi
+
+gpg -c --no-symkey-cache ".env"
+if [ $? -ne 0 ]; then
+  echo "Failed encrypting .env file"
+  exit 1
+fi
+exit 0
