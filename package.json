@@ -6,8 +6,8 @@
   "name": "quiccasa",
   "scripts": {
     "lint": "eslint index.js",
-    "deploya": "eslint index.js components/*.js && SLS_DEBUG=* serverless deploy",
-    "deploy": "eslint index.js components/*.js && SLS_DEBUG=* serverless deploy --function",
+    "deploy": "eslint index.js components/*.js && SLS_DEBUG=* serverless deploy",
+    "deploy1": "eslint index.js components/*.js && SLS_DEBUG=* serverless deploy --function",
     "invoke": "serverless invoke local --function",
     "test:valid": "SLS_DEBUG=* serverless invoke --path test/valid.json --function",
     "test:invalid": "SLS_DEBUG=* serverless invoke --path test/invalid.json --function"
@@ -15,7 +15,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
-    "serverless": "^2.30.3"
+    "serverless": "^2.50.0"
   },
-  "version": "0.0.10"
+  "version": "0.0.11"
 }
