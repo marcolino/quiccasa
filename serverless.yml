@@ -51,8 +51,8 @@ functions:
           path: crawl
 #     - schedule: rate(10 minutes)
 #     - schedule: cron(0/30 6-22 ? * MON-FRI *) # times are GMT (6 => GMT-1 summertime => 8, 6 => GMT-1 wintertime => 7)
-      - schedule: cron(0 6-20/3 ? * MON-FRI *) # times are GMT
-      - schedule: cron(0 6-20/6 ? * SAT-SUN *) # times are GMT
+      - schedule: cron(0 6-20/4 ? * MON-FRI *) # times are GMT
+      - schedule: cron(0 6-20/8 ? * SAT-SUN *) # times are GMT
     timeout: 30 # seconds, default is 6
   home:
     handler: index.home
@@ -87,7 +87,10 @@ functions:
           package:
 package:
   exclude:
-    - client/node_modules/**
+    - private/**
+    - node_modules/**
+    - tmp/**
+#   - website/**
 resources:
   Resources:
     NewResource:

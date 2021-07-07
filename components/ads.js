@@ -230,21 +230,11 @@ module.exports.adsEmailBodyFormat = (adsList, searchParameters) => {
             <table role="presentation" align="center" style="width:600px;"><tr><td>
             <![endif]-->
             <table role="presentation" style="width:94%;max-width:800px;border:none;border-spacing:0;text-align:left;font-family:Helvetica,Verdana,Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
-              <!--
-              <tr>
-                <td style="padding:40px 30px 30px 30px;text-align:center;font-size:24px;font-weight:bold;">
-                  <a href="http://www.example.com/" style="text-decoration:none;"><img src="https://assets.codepen.io/210284/logo.png" width="165" alt="Logo" style="width:80%;max-width:165px;height:auto;border:none;text-decoration:none;color:#ffffff;"></a>
-                </td>
-              </tr>
-              -->
               <tr>
                 <td style="padding:30px;background-color:#ffffff;">
                   <p style="margin-top:0;margin-bottom:16px;text-decoration:none;">
                     ${adsList.length} nuov${one ? 'o' : 'i'} annunc${one ? 'io' : 'i'} appena pubblicat${one ? 'o' : 'i'} su <b>immobiliare.it</b>
                   </p>
-                  <!--<p style="margin:0;">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, <a href="http://www.example.com/" style="color:#e50d70;text-decoration:underline;">eget accumsan dictum</a>, nisi libero ultricies ipsum, in posuere mauris neque at erat.
-                  </p>-->
                 </td>
               </tr>
 

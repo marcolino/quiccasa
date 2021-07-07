@@ -1,9 +1,0 @@
-Documentation/Stories
-
-Agnita: Authentication for Create React App using AWS Cognito
- - https://levelup.gitconnected.com/agnita-authentication-for-create-react-app-using-aws-cognito-80cde1fb781b
-
-Security practices
- - .env files are excluded by git repositories;
-   when adding some secret to .env, crypt it with yarn env-crypt;
-   it can be later decrypted with `yarn env-decrypt`.

@@ -169,7 +169,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1625575737208-2021-07-06T12:48:57.208Z/quiccasa.zip"
         },
         "Handler": "index.crawl",
         "Runtime": "nodejs12.x",
@@ -199,7 +199,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1625575737208-2021-07-06T12:48:57.208Z/quiccasa.zip"
         },
         "Handler": "index.home",
         "Runtime": "nodejs12.x",
@@ -229,7 +229,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1625575737208-2021-07-06T12:48:57.208Z/quiccasa.zip"
         },
         "Handler": "index.subscribe",
         "Runtime": "nodejs12.x",
@@ -259,7 +259,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1625575737208-2021-07-06T12:48:57.208Z/quiccasa.zip"
         },
         "Handler": "index.reset",
         "Runtime": "nodejs12.x",
@@ -289,7 +289,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1625575737208-2021-07-06T12:48:57.208Z/quiccasa.zip"
         },
         "Handler": "index.unsubscribe",
         "Runtime": "nodejs12.x",
@@ -319,7 +319,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
-          "S3Key": "serverless/quiccasa/dev/1619594462020-2021-04-28T07:21:02.020Z/quiccasa.zip"
+          "S3Key": "serverless/quiccasa/dev/1625575737208-2021-07-06T12:48:57.208Z/quiccasa.zip"
         },
         "Handler": "index.actionUnsubscribe",
         "Runtime": "nodejs12.x",
@@ -344,70 +344,70 @@
         "ActionUnsubscribeLogGroup"
       ]
     },
-    "CrawlLambdaVersionq37Dsrf0rMjqOdalG72YA5jRzzFE9oGD6x6n7A1DI": {
+    "CrawlLambdaVersionE9hGENZ8MUaLsGdpNJYehBtMrYNsmJqBwGqf5XSw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CrawlLambdaFunction"
         },
-        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
+        "CodeSha256": "4Ptb0ydw6VQQ6Angh19mEtD6iUYeYYRgyvg0X+yTFM8="
       }
     },
-    "HomeLambdaVersionYVxx8JpNyrkJcqdtmDWR0pPHMGGLPQKo0F6dKPpTw": {
+    "HomeLambdaVersion3G9lMSbSKYgR5zdCSVeHubhhSzJPRb03x8DXVmSXZpY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HomeLambdaFunction"
         },
-        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
+        "CodeSha256": "4Ptb0ydw6VQQ6Angh19mEtD6iUYeYYRgyvg0X+yTFM8="
       }
     },
-    "SubscribeLambdaVersionhsdE0tkPk57lKIWVRDZHNUIxN3NqmbRGayVFh4z0": {
+    "SubscribeLambdaVersion78Ot7Hi08WBTbWJPeowUIEiYY7pb0NUBRP2OL5yac": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SubscribeLambdaFunction"
         },
-        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
+        "CodeSha256": "4Ptb0ydw6VQQ6Angh19mEtD6iUYeYYRgyvg0X+yTFM8="
       }
     },
-    "ResetLambdaVersionAiEKmJlJ532rVN886nNTYfGKZ9hweWbS9J0vUiIw": {
+    "ResetLambdaVersionZieOT9dsV5vnHkjwRezvfDCDS25qBba1YY5Pg44Bvo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ResetLambdaFunction"
         },
-        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
+        "CodeSha256": "4Ptb0ydw6VQQ6Angh19mEtD6iUYeYYRgyvg0X+yTFM8="
       }
     },
-    "UnsubscribeLambdaVersionvfuI5pQ9IFWHFaIjaJmLeO9peYaRoTGWcvvbKWMa44": {
+    "UnsubscribeLambdaVersion24M3w51nE4IogiUp58A4ZYJn63kSvfSg9zPAgZtlrI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UnsubscribeLambdaFunction"
         },
-        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
+        "CodeSha256": "4Ptb0ydw6VQQ6Angh19mEtD6iUYeYYRgyvg0X+yTFM8="
       }
     },
-    "ActionUnsubscribeLambdaVersionxVUh74z2soRM5qg7IyJnIpfl5RyEtEcj2CRPkRdCpY": {
+    "ActionUnsubscribeLambdaVersionhnguhV42Lg6PfHDZpYKcjNnDojqglGGwEEQek16TukI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ActionUnsubscribeLambdaFunction"
         },
-        "CodeSha256": "RafvDK+gn7KJDLt+7dVWGzQlC3DCuWaRot6bKzAf4Dw="
+        "CodeSha256": "4Ptb0ydw6VQQ6Angh19mEtD6iUYeYYRgyvg0X+yTFM8="
       }
     },
     "CrawlEventsRuleSchedule1": {
       "Type": "AWS::Events::Rule",
       "Properties": {
-        "ScheduleExpression": "cron(0 6-20/3 ? * MON-FRI *)",
+        "ScheduleExpression": "cron(0 6-20/4 ? * MON-FRI *)",
         "State": "ENABLED",
         "Targets": [
           {
@@ -444,7 +444,7 @@
     "CrawlEventsRuleSchedule2": {
       "Type": "AWS::Events::Rule",
       "Properties": {
-        "ScheduleExpression": "cron(0 6-20/6 ? * SAT-SUN *)",
+        "ScheduleExpression": "cron(0 6-20/8 ? * SAT-SUN *)",
         "State": "ENABLED",
         "Targets": [
           {
@@ -621,7 +621,10 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": [
+        "CrawlLambdaPermissionApiGateway"
+      ]
     },
     "ApiGatewayMethodHomeGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -664,7 +667,10 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": [
+        "HomeLambdaPermissionApiGateway"
+      ]
     },
     "ApiGatewayMethodSubscribeGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -707,7 +713,10 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": [
+        "SubscribeLambdaPermissionApiGateway"
+      ]
     },
     "ApiGatewayMethodResetGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -750,7 +759,10 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": [
+        "ResetLambdaPermissionApiGateway"
+      ]
     },
     "ApiGatewayMethodUnsubscribeGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -793,7 +805,10 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": [
+        "UnsubscribeLambdaPermissionApiGateway"
+      ]
     },
     "ApiGatewayMethodActionunsubscribeGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -836,9 +851,12 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": [
+        "ActionUnsubscribeLambdaPermissionApiGateway"
+      ]
     },
-    "ApiGatewayDeployment1619594437180": {
+    "ApiGatewayDeployment1625575733394": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1086,42 +1104,63 @@
   },
   "Outputs": {
     "ServerlessDeploymentBucketName": {
-      "Value": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6"
+      "Value": "quiccasa-dev-serverlessdeploymentbucket-ajudt9uilmg6",
+      "Export": {
+        "Name": "sls-quiccasa-dev-ServerlessDeploymentBucketName"
+      }
     },
     "CrawlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CrawlLambdaVersionq37Dsrf0rMjqOdalG72YA5jRzzFE9oGD6x6n7A1DI"
+        "Ref": "CrawlLambdaVersionE9hGENZ8MUaLsGdpNJYehBtMrYNsmJqBwGqf5XSw"
+      },
+      "Export": {
+        "Name": "sls-quiccasa-dev-CrawlLambdaFunctionQualifiedArn"
       }
     },
     "HomeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HomeLambdaVersionYVxx8JpNyrkJcqdtmDWR0pPHMGGLPQKo0F6dKPpTw"
+        "Ref": "HomeLambdaVersion3G9lMSbSKYgR5zdCSVeHubhhSzJPRb03x8DXVmSXZpY"
+      },
+      "Export": {
+        "Name": "sls-quiccasa-dev-HomeLambdaFunctionQualifiedArn"
       }
     },
     "SubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SubscribeLambdaVersionhsdE0tkPk57lKIWVRDZHNUIxN3NqmbRGayVFh4z0"
+        "Ref": "SubscribeLambdaVersion78Ot7Hi08WBTbWJPeowUIEiYY7pb0NUBRP2OL5yac"
+      },
+      "Export": {
+        "Name": "sls-quiccasa-dev-SubscribeLambdaFunctionQualifiedArn"
       }
     },
     "ResetLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ResetLambdaVersionAiEKmJlJ532rVN886nNTYfGKZ9hweWbS9J0vUiIw"
+        "Ref": "ResetLambdaVersionZieOT9dsV5vnHkjwRezvfDCDS25qBba1YY5Pg44Bvo"
+      },
+      "Export": {
+        "Name": "sls-quiccasa-dev-ResetLambdaFunctionQualifiedArn"
       }
     },
     "UnsubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UnsubscribeLambdaVersionvfuI5pQ9IFWHFaIjaJmLeO9peYaRoTGWcvvbKWMa44"
+        "Ref": "UnsubscribeLambdaVersion24M3w51nE4IogiUp58A4ZYJn63kSvfSg9zPAgZtlrI"
+      },
+      "Export": {
+        "Name": "sls-quiccasa-dev-UnsubscribeLambdaFunctionQualifiedArn"
       }
     },
     "ActionUnsubscribeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ActionUnsubscribeLambdaVersionxVUh74z2soRM5qg7IyJnIpfl5RyEtEcj2CRPkRdCpY"
+        "Ref": "ActionUnsubscribeLambdaVersionhnguhV42Lg6PfHDZpYKcjNnDojqglGGwEEQek16TukI"
+      },
+      "Export": {
+        "Name": "sls-quiccasa-dev-ActionUnsubscribeLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
@@ -1145,6 +1184,9 @@
             "/dev"
           ]
         ]
+      },
+      "Export": {
+        "Name": "sls-quiccasa-dev-ServiceEndpoint"
       }
     }
   }

@@ -48,7 +48,7 @@ criterio=rilevanza&prezzoMinimo=240000&prezzoMassimo=380000&superficieMinima=80&
       agencyes: [
         //{ urlPattern: "\/plan-buy-broker\/$" }, // url not present in main listing
         //{ logoPattern: "/670674587.|/713419966." },
-        { logoAltPattern: "PLAN BUY®" }, 
+        { logoAltPattern: "PLAN BUY®" },
       ],
     },
   };
